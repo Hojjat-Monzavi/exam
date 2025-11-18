@@ -1,0 +1,589 @@
+<!doctype html>
+<html dir=rtl lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحانات ترم ۳</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+
+        :root {
+            --bg-base: #e8ecf1;
+            --bg-pattern: #d4dae3;
+            --container-bg: rgba(255, 255, 255, 0.25);
+            --text-color: #2c3e50;
+            --header-bg: rgba(52, 73, 94, 0.65);
+            --header-text: #ecf0f1;
+            --table-header-bg: rgba(248, 249, 250, 0.4);
+            --border-color: rgba(233, 236, 239, 0.4);
+            --hover-bg: rgba(241, 243, 244, 0.35);
+            --accent-color: #e74c3c;
+            --time-color: #3498db;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --gap-bg: rgba(239, 243, 239, 0.45);
+            --gap-text: #27ae60;
+            --success-color: #27ae60;
+            --muted-color: #7f8c8d;
+        }
+
+        [data-theme="dark"] {
+            --bg-base: #0a0a0f;
+            --bg-pattern: #1a1a24;
+            --container-bg: rgba(30, 30, 40, 0.25);
+            --text-color: #e0e0e0;
+            --header-bg: rgba(52, 73, 94, 0.65);
+            --header-text: #f0f0f0;
+            --table-header-bg: rgba(45, 45, 55, 0.4);
+            --border-color: rgba(64, 64, 74, 0.4);
+            --hover-bg: rgba(42, 42, 52, 0.35);
+            --accent-color: #ff9898;
+            --time-color: #64b5f6;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --gap-bg: rgba(42, 42, 52, 0.45);
+            --gap-text: #8df0b6;
+            --success-color: #81c784;
+            --muted-color: #757575;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+            background-color: var(--bg-base);
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4dae3' stroke-width='1.5'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3Cline x1='50' y1='50' x2='55' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 60px 60px;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 100px;
+            min-height: 100vh;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] body {
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231a1a24' stroke-width='1.5'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3Cline x1='50' y1='50' x2='55' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: var(--header-text);
+            padding: 18px 24px;
+            border-radius: 16px 16px 0 0;
+            margin-bottom: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.35em;
+            flex: 1;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--header-text);
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .container {
+            background: var(--container-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 16px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px var(--shadow), 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: var(--container-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th,
+        td {
+            padding: 14px 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.92em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        th {
+            background: var(--table-header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            letter-spacing: -0.01em;
+        }
+
+        tr {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        tbody tr {
+            background: var(--container-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        tr:hover {
+            background: var(--hover-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transform: translateX(-2px);
+        }
+
+        .days-left {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .exam-name {
+            text-align: right;
+            padding-right: 16px;
+            font-weight: 500;
+        }
+
+        .time {
+            font-weight: 600;
+            color: var(--time-color);
+        }
+
+        .gap-indicator {
+            background: var(--gap-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: var(--gap-text);
+            text-align: center;
+            padding: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            font-style: italic;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .today {
+            color: var(--success-color) !important;
+            font-weight: 600;
+        }
+
+        .passed {
+            color: var(--muted-color) !important;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+                padding-bottom: 90px;
+            }
+
+            .header {
+                padding: 14px 18px;
+                border-radius: 14px 14px 0 0;
+            }
+
+            .header h1 {
+                font-size: 1.25em;
+            }
+
+            table {
+                min-width: 100%;
+                font-size: 0.95em;
+            }
+
+            th,
+            td {
+                padding: 10px 6px;
+            }
+
+            .exam-name {
+                padding-right: 10px;
+                max-width: 120px;
+                word-wrap: break-word;
+            }
+
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                padding: 8px;
+            }
+
+            .container {
+                border-radius: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            th,
+            td {
+                padding: 8px 4px;
+                font-size: 0.9em;
+            }
+
+            .header h1 {
+                font-size: 1.15em;
+            }
+
+            .exam-name {
+                max-width: 100px;
+            }
+
+            .container {
+                border-radius: 12px;
+            }
+
+            .header {
+                border-radius: 12px 12px 0 0;
+            }
+        }
+
+        .footer-floating {
+            position: fixed;
+            bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            padding: 12px 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+            z-index: 999;
+            font-size: 0.95em;
+            white-space: nowrap;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer-floating:hover {
+            transform: translateX(50%) translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] .footer-floating {
+            background: rgba(30, 30, 40, 0.25);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-link-floating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer-link-floating:hover {
+            color: var(--accent-color);
+        }
+
+        .tg-icon {
+            width: 22px;
+            height: 22px;
+            filter: invert(10%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer-link-floating:hover .tg-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        [data-theme="dark"] .tg-icon {
+            filter: invert(90%);
+        }
+
+        @media (max-width: 600px) {
+            .footer-floating {
+                bottom: 14px;
+                padding: 10px 16px;
+                font-size: 0.85em;
+                border-radius: 12px;
+                max-width: 92%;
+            }
+
+            .tg-icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        tr {
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        }
+
+        tr:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        tr:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        tr:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        tr:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        tr:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" aria-label="تغییر تم">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z" />
+                </svg>
+            </button>
+            <h1>برنامه امتحانی ترم ۳ پزشکی بهمن ۱۴۰۲</h1>
+            <div style="width: 100px;"></div>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>نام امتحان</th>
+                        <th>تاریخ</th>
+                        <th>ساعت</th>
+                        <th>روز</th>
+                        <th>روزهای باقی‌مانده</th>
+                    </tr>
+                </thead>
+                <tbody id="examTableBody">
+                    <!-- Exams will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer-floating">
+        <a href="https://t.me/OlumPayeQuestion" target="_blank" class="footer-link-floating">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" class="tg-icon"
+                alt="Telegram" />
+            هر روز کلی سؤال علوم پایه در @OlumPayeQuestion
+        </a>
+    </footer>
+
+    <script>
+        function toPersianNumbers(str) {
+            const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+            const englishDigits = '0123456789';
+            return str.toString().replace(/[0-9]/g, function (digit) {
+                return persianDigits[englishDigits.indexOf(digit)];
+            });
+        }
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        const exams = [
+            { name: 'میانترم فیزیولوژی دکتر حسینی', persianDate: '۱ آذر', time: '-', day: 'شنبه', gregorianDate: '2025-11-22' },
+            { name: 'میانترم علوم تشریح اعصاب گروه ۱۱/۱۲', persianDate: '۱۵ آذر', time: '-', day: 'شنبه', gregorianDate: '2025-12-06' },
+            { name: 'آداب پزشکی (۴)', persianDate: '۱۷ آذر', time: '۱۱:۴۵', day: 'دوشنبه', gregorianDate: '2025-12-08' },
+            { name: 'علوم تشریح حواس ویژه', persianDate: '۲۹ آذر', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-20' },
+            { name: 'اصول فارماکولوژی', persianDate: '۶ دی', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-27' },
+            { name: 'ایمنی شناسی نظری', persianDate: '۲۰ دی', time: '۱۲:۰۰', day: 'شنبه', gregorianDate: '2026-01-10' },
+            { name: 'اصول اپیدمیولوژی', persianDate: '۲۲ دی', time: '۱۲:۰۰', day: 'دوشنبه', gregorianDate: '2026-01-12' },
+            { name: 'فیزیک پزشکی', persianDate: '۲۴ دی', time: '۱۳:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-14' },
+            { name: 'قارچ شناسی نظری', persianDate: '۳۰ دی', time: '۱۳:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-01-20' },
+            { name: 'تفسیر موضوعی قرآن', persianDate: '۱ بهمن', time: '۰۸:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-21' },
+            { name: 'انگل شناسی نظری', persianDate: '۴ بهمن', time: '۱۳:۰۰', day: 'شنبه', gregorianDate: '2026-01-24' },
+            { name: 'علوم تشریح اعصاب نظری', persianDate: '۸ بهمن', time: '۱۱:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-28' },
+            { name: 'فیزیولوژی اعصاب و حواس ویژه', persianDate: '۱۱ بهمن', time: '۰۹:۰۰', day: 'شنبه', gregorianDate: '2026-01-31' },
+            { name: 'پاتولوژی عمومی نظری', persianDate: '۱۴ بهمن', time: '۱۱:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-02-03' },
+            { name: 'آزمون جامع علوم پایه کشوری', persianDate: '۲۸ بهمن', time: '۰۸:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-02-17' }
+        ];
+
+        function initTheme() {
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const defaultTheme = systemDark ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', defaultTheme);
+            updateThemeButton(defaultTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            updateThemeButton(newTheme);
+        }
+
+        function updateThemeButton(theme) {
+            const button = document.getElementById('themeToggle');
+            const icon = button.querySelector('.icon path');
+            if (theme === 'dark') {
+                icon.setAttribute('d', 'M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
+            } else {
+                icon.setAttribute('d', 'M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initTheme);
+
+
+        function populateExamTable() {
+            const tableBody = document.getElementById('examTableBody');
+            const today = new Date();
+
+            for (let i = 0; i < exams.length; i++) {
+                const exam = exams[i];
+                const examDate = new Date(exam.gregorianDate);
+                const timeDifference = examDate - today;
+                const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+                if (i > 0) {
+                    const prevExamDate = new Date(exams[i - 1].gregorianDate);
+                    const daysBetween = Math.ceil((examDate - prevExamDate) / (1000 * 60 * 60 * 24));
+
+                    if (daysBetween > 0) {
+                        const gapRow = document.createElement('tr');
+                        gapRow.innerHTML = `
+                            <td colspan="5" class="gap-indicator">
+                                <svg class="icon" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
+                                </svg>
+                                فاصله تا امتحان بعدی: ${toPersianNumbers(daysBetween)} روز
+                            </td>
+                        `;
+                        tableBody.appendChild(gapRow);
+                    }
+                }
+
+                const row = document.createElement('tr');
+
+                let daysLeftText = '';
+                let daysLeftClass = 'days-left';
+
+                if (daysLeft > 0) {
+                    daysLeftText = toPersianNumbers(daysLeft) + ' روز';
+                } else if (daysLeft === 0) {
+                    daysLeftText = 'امروز';
+                    daysLeftClass += ' today';
+                } else {
+                    daysLeftText = 'گذشته';
+                    daysLeftClass += ' passed';
+                }
+
+                row.innerHTML = `
+                    <td class="exam-name">${exam.name}</td>
+                    <td>${toPersianNumbers(exam.persianDate)}</td>
+                    <td class="time">${toPersianNumbers(exam.time)}</td>
+                    <td>${exam.day}</td>
+                    <td class="${daysLeft === 0 ? 'today' : daysLeft < 0 ? 'passed' : 'days-left'}">
+                        ${daysLeftText}
+                    </td>
+                `;
+
+                tableBody.appendChild(row);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            populateExamTable();
+        });
+    </script>
+</body>
+
+</html>
