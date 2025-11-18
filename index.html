@@ -22,8 +22,8 @@
             --accent-color: #e74c3c;
             --time-color: #3498db;
             --shadow: rgba(0, 0, 0, 0.08);
-            --gap-bg: rgba(239, 243, 239, 0.45);
-            --gap-text: #27ae60;
+            --gap-bg: rgba(230, 126, 34, 0.1);
+            --gap-text: #d35400;
             --success-color: #27ae60;
             --muted-color: #7f8c8d;
         }
@@ -41,8 +41,8 @@
             --accent-color: #ff9898;
             --time-color: #64b5f6;
             --shadow: rgba(0, 0, 0, 0.4);
-            --gap-bg: rgba(42, 42, 52, 0.45);
-            --gap-text: #8df0b6;
+            --gap-bg: rgba(243, 156, 18, 0.15);
+            --gap-text: #f39c12;
             --success-color: #81c784;
             --muted-color: #757575;
         }
@@ -156,7 +156,6 @@
         }
 
         .table-container {
-            overflow-x: auto;
             background: var(--container-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -165,7 +164,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px;
+            table-layout: fixed;
         }
 
         th,
@@ -214,6 +213,8 @@
             text-align: right;
             padding-right: 16px;
             font-weight: 500;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .time {
@@ -233,6 +234,26 @@
             border-bottom: 1px solid var(--border-color);
             font-style: italic;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gap-indicator-long {
+            --gap-bg: rgba(39, 174, 96, 0.1);
+            --gap-text: #27ae60;
+        }
+
+        .gap-indicator-short {
+            --gap-bg: rgba(192, 57, 43, 0.08);
+            --gap-text: #c0392b;
+        }
+
+        [data-theme="dark"] .gap-indicator-long {
+            --gap-bg: rgba(130, 224, 170, 0.15);
+            --gap-text: #82e0aa;
+        }
+
+        [data-theme="dark"] .gap-indicator-short {
+            --gap-bg: rgba(235, 152, 138, 0.15);
+            --gap-text: #eb988a;
         }
 
         .today {
@@ -420,6 +441,13 @@
         tr:nth-child(5) {
             animation-delay: 0.25s;
         }
+
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: var(--muted-color);
+        }
     </style>
 </head>
 
@@ -453,6 +481,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="copyright">
+        brought to you توسط حجت
     </div>
 
     <footer class="footer-floating">
@@ -542,6 +574,21 @@
             const tableBody = document.getElementById('examTableBody');
             const today = new Date();
 
+            const gaps = [];
+            for (let i = 1; i < exams.length; i++) {
+                const prevExamDate = new Date(exams[i - 1].gregorianDate);
+                const examDate = new Date(exams[i].gregorianDate);
+                const daysBetween = Math.ceil((examDate - prevExamDate) / (1000 * 60 * 60 * 24));
+                if (daysBetween > 0) {
+                    gaps.push(daysBetween);
+                }
+            }
+            gaps.sort((a, b) => a - b);
+
+            const thresholdCount = Math.max(1, Math.floor(gaps.length * 0.25));
+            const shortThreshold = gaps[thresholdCount - 1];
+            const longThreshold = gaps[gaps.length - thresholdCount];
+
             for (let i = 0; i < exams.length; i++) {
                 const exam = exams[i];
                 const examDate = new Date(exam.gregorianDate);
@@ -553,9 +600,16 @@
                     const daysBetween = Math.ceil((examDate - prevExamDate) / (1000 * 60 * 60 * 24));
 
                     if (daysBetween > 0) {
+                        let gapClass = 'gap-indicator';
+                        if (daysBetween >= longThreshold) {
+                            gapClass += ' gap-indicator-long';
+                        } else if (daysBetween <= shortThreshold) {
+                            gapClass += ' gap-indicator-short';
+                        }
+
                         const gapRow = document.createElement('tr');
                         gapRow.innerHTML = `
-                            <td colspan="5" class="gap-indicator">
+                            <td colspan="5" class="${gapClass}">
                                 <svg class="icon" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
                                 </svg>
