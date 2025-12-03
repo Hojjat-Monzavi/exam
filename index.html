@@ -526,22 +526,23 @@
             return null;
         }
 
-        const exams = [
-            { name: 'میانترم فیزیولوژی دکتر حسینی', persianDate: '۱ آذر', time: '-', day: 'شنبه', gregorianDate: '2025-11-22' },
-            { name: 'میانترم علوم تشریح اعصاب گروه ۱۱/۱۲', persianDate: '۱۵ آذر', time: '-', day: 'شنبه', gregorianDate: '2025-12-06' },
-            { name: 'آداب پزشکی (۴)', persianDate: '۱۷ آذر', time: '۱۱:۴۵', day: 'دوشنبه', gregorianDate: '2025-12-08' },
-            { name: 'علوم تشریح حواس ویژه', persianDate: '۲۹ آذر', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-20' },
-            { name: 'اصول فارماکولوژی', persianDate: '۶ دی', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-27' },
-            { name: 'ایمنی شناسی نظری', persianDate: '۲۰ دی', time: '۱۲:۰۰', day: 'شنبه', gregorianDate: '2026-01-10' },
-            { name: 'اصول اپیدمیولوژی', persianDate: '۲۲ دی', time: '۱۲:۰۰', day: 'دوشنبه', gregorianDate: '2026-01-12' },
-            { name: 'فیزیک پزشکی', persianDate: '۲۴ دی', time: '۱۳:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-14' },
-            { name: 'قارچ شناسی نظری', persianDate: '۳۰ دی', time: '۱۳:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-01-20' },
-            { name: 'تفسیر موضوعی قرآن', persianDate: '۱ بهمن', time: '۰۸:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-21' },
-            { name: 'انگل شناسی نظری', persianDate: '۴ بهمن', time: '۱۳:۰۰', day: 'شنبه', gregorianDate: '2026-01-24' },
-            { name: 'علوم تشریح اعصاب نظری', persianDate: '۸ بهمن', time: '۱۱:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-28' },
-            { name: 'فیزیولوژی اعصاب و حواس ویژه', persianDate: '۱۱ بهمن', time: '۰۹:۰۰', day: 'شنبه', gregorianDate: '2026-01-31' },
-            { name: 'آزمون جامع علوم پایه کشوری', persianDate: '۲۸ بهمن', time: '۰۸:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-02-17' }
-        ];
+const exams = [
+    { name: 'میانترم فیزیولوژی دکتر حسینی', persianDate: '۱ آذر', time: '-', day: 'شنبه', gregorianDate: '2025-11-22' },
+    { name: 'نورو دکتر محمدی‌پور و وفایی', persianDate: '۱۵ آذر', time: '-', day: 'شنبه', gregorianDate: '2025-12-06' },
+    { name: 'آداب پزشکی (۴)', persianDate: '۱۷ آذر', time: '۱۱:۴۵', day: 'دوشنبه', gregorianDate: '2025-12-08' },
+    { name: 'فیزیک پزشکی', persianDate: '۲۲ آذر', time: '-', day: 'پنج‌شنبه', gregorianDate: '2025-12-13' },
+    { name: 'علوم تشریح حواس ویژه', persianDate: '۲۹ آذر', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-20' },
+    { name: 'مقدمات فارماکولوژی', persianDate: '۶ دی', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-27' },
+    { name: 'ایمنی شناسی عملی', persianDate: '۷ دی', time: '-', day: 'یک‌شنبه', gregorianDate: '2025-12-28' },
+    { name: 'ایمنی شناسی نظری', persianDate: '۲۰ دی', time: '۱۲:۰۰', day: 'شنبه', gregorianDate: '2026-01-10' },
+    { name: 'اصول اپیدمیولوژی', persianDate: '۲۲ دی', time: '۱۲:۰۰', day: 'دوشنبه', gregorianDate: '2026-01-12' },
+    { name: 'قارچ شناسی نظری', persianDate: '۳۰ دی', time: '۱۳:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-01-20' },
+    { name: 'تفسیر موضوعی قرآن', persianDate: '۱ بهمن', time: '۰۸:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-21' },
+    { name: 'انگل شناسی نظری', persianDate: '۴ بهمن', time: '۱۳:۰۰', day: 'شنبه', gregorianDate: '2026-01-24' },
+    { name: 'علوم تشریح اعصاب نظری', persianDate: '۸ بهمن', time: '۱۱:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-28' },
+    { name: 'فیزیولوژی اعصاب و حواس ویژه', persianDate: '۱۱ بهمن', time: '۰۹:۰۰', day: 'شنبه', gregorianDate: '2026-01-31' },
+    { name: 'آزمون جامع علوم پایه کشوری', persianDate: '۲۸ بهمن', time: '۰۸:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-02-17' }
+];
 
         function initTheme() {
             const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
