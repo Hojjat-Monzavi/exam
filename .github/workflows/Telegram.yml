@@ -46,7 +46,7 @@ jobs:
                 day=$(echo "$day" | xargs)
                 
                 if [[ -n "$name" && -n "$persian_date" && -n "$time" ]]; then
-                  echo "\n• <b>$name</b>\n 📆 $day | 📅 $persian_date | 🕘 $time"  >> $GITHUB_OUTPUT
+                  echo "\n• <b>$name</b>\n $day | $persian_date | $time"  >> $GITHUB_OUTPUT
                 fi
               done <<< "$EXAMS_DATA"
               echo "EOF" >> $GITHUB_OUTPUT
