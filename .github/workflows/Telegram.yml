@@ -70,6 +70,7 @@ jobs:
           COMMIT_SHA=$(git log -1 --pretty=format:"%h")
           
           echo "COMMITTER=$COMMITTER" >> $GITHUB_OUTPUT
+          echo "REPO_NAME=$REPO_NAME" >> $GITHUB_OUTPUT
           echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
           echo "COMMIT_SHA=$COMMIT_SHA" >> $GITHUB_OUTPUT
           
@@ -144,13 +145,11 @@ jobs:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="<b>🚀 تغییر جدید در مخزن</b>
+          MESSAGE="MESSAGE="<b>🚀 New Push to ${{ steps.commit_log.outputs.REPO_NAME }}</b>
 
-          👤 <b>مشارکت کننده:</b> ${{ steps.commit_log.outputs.COMMITTER }}
-          📝 <b>شرح:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
-          🔖 <b>کامیت:</b> \`${{ steps.commit_log.outputs.COMMIT_SHA }}\`
-
-          🌐 <a href='${{ steps.commit_log.outputs.PAGES_URL }}'>مشاهده صفحه جدول آزمون</a>"
+          👤 <b>Committer:</b> ${{ steps.commit_log.outputs.COMMITTER }}
+          📝 <b>Commit:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
+          
 
           RESPONSE=$(curl -s -X POST \
             -H 'Content-Type: application/json' \
