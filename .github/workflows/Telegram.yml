@@ -87,7 +87,7 @@ jobs:
           # Create message with HTML formatting for Telegram
           MESSAGE="<b>📚 آزمون‌های پیش رو</b> 
 
-          <pre>${{ steps.exam_data.outputs.EXAM_LIST }}</pre>
+          <blockquote expandable>${{ steps.exam_data.outputs.EXAM_LIST }}</blockquote>
 
           🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
 
@@ -145,10 +145,11 @@ jobs:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="MESSAGE="<b>🚀 New Push to ${{ steps.commit_log.outputs.REPO_NAME }}</b>
+          MESSAGE="<b>🚀 New Push to ${{ steps.commit_log.outputs.REPO_NAME }}</b>
 
           👤 <b>Committer:</b> ${{ steps.commit_log.outputs.COMMITTER }}
           📝 <b>Commit:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
+          "
           
 
           RESPONSE=$(curl -s -X POST \
