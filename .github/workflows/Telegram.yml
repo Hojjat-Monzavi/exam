@@ -6,7 +6,7 @@ on:
       - main  # or master, depending on your default branch
   schedule:
     # Run daily at 09:00 UTC (adjust as needed)
-    - cron: '13 9 * * *'
+    - cron: '0 9 * * *'
 
 jobs:
   notify-exam-schedule-or-commit:
@@ -171,7 +171,7 @@ jobs:
 
           <b>🔄 آخرین بروزرسانی:</b>
           👤 <b>Commiter:</b> ${{ steps.commit_log.outputs.COMMITTER }}
-          📅 <b>Date:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }} 
+          📅 <b>Date:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }}
           📝 <b>Message:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
 
           🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه وب</a>"
