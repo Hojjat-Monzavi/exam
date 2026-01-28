@@ -31,7 +31,6 @@ jobs:
 
       - name: Prepare exam data (for daily update)
         id: exam_data
-        if: steps.determine_event.outputs.type == 'daily_update'
         run: |
           if [ -f "exams.csv" ]; then
             # Extract exam data, skipping header
@@ -79,7 +78,7 @@ jobs:
           echo "PAGES_URL=$PAGES_URL" >> $GITHUB_OUTPUT
 
       - name: Send Daily Exam Schedule Update
-        if: steps.determine_event.outputs.type == 'daily_update' && steps.exam_data.outputs.FOUND_EXAMS == 'true'
+        if: steps.exam_data.outputs.FOUND_EXAMS == 'true'
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -111,7 +110,7 @@ jobs:
           fi
 
       - name: Send Empty Exam Schedule Message
-        if: steps.determine_event.outputs.type == 'daily_update' && steps.exam_data.outputs.FOUND_EXAMS == 'false'
+        if: steps.exam_data.outputs.FOUND_EXAMS == 'false'
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
