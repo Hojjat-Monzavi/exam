@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='currentColor' d='M13.5 13.5h-3v-3h3zm-3-4.5h3V6h-3zm-1.5 9h6v-3h-6zm-3 3h9v-3h-9zm-3-3h3v-3H6zm0-4.5h3v-3H6zm-3 3h3v-3H3zm0 4.5h3v-3H3zm12-12h3V3h-3zm-3 3h3V3h-3zm-3-3h3V3h-3zm-3 3h3V3h-3zm-3-3h3V3H3zm12 12h3v-3h-3zm-3 3h3v-3h-3zm-3-3h3v-3h-3zm-3 3h3v-3h-3zm-3-3h3v-3H3z'/></svg>">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn  :wght@400;500;700&display=swap');
 
         :root {
             --bg-base: #e8ecf1;
@@ -478,7 +478,8 @@
                     </tr>
                 </thead>
                 <tbody id="examTableBody">
-                    <!-- Exams will be populated by JavaScript -->
+                    <!-- Exams will be populated by JavaScript from CSV -->
+                    <tr><td colspan="5" class="loading">در حال بارگذاری...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -489,8 +490,8 @@
     </div>
 
     <footer class="footer-floating">
-        <a href="https://t.me/OlumPayeQuestion" target="_blank" class="footer-link-floating">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" class="tg-icon"
+        <a href="https://t.me/OlumPayeQuestion  " target="_blank" class="footer-link-floating">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg  " class="tg-icon"
                 alt="Telegram" />
             هر روز کلی سؤال علوم پایه در @OlumPayeQuestion
         </a>
@@ -526,63 +527,64 @@
             return null;
         }
 
-const exams = [
-    { name: 'میانترم فیزیولوژی دکتر حسینی', persianDate: '۱ آذر', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-11-22' },
-    { name: 'نورو دکتر محمدی‌پور و وفایی', persianDate: '۱۵ آذر', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-06' },
-    { name: 'آداب پزشکی (۴)', persianDate: '۱۷ آذر', time: '۱۱:۴۵', day: 'دوشنبه', gregorianDate: '2025-12-08' },
-    { name: 'فیزیک پزشکی', persianDate: '۲۲ آذر', time: '۱۱:۴۵', day: 'شنبه', gregorianDate: '2025-12-13' },
-    { name: 'علوم تشریح حواس ویژه', persianDate: '۲ دی', time: '۱۳:۰۰', day: 'سه‌شنبه', gregorianDate: '2025-12-23' },
-    { name: 'مقدمات فارماکولوژی', persianDate: '۶ دی', time: '۰۸:۰۰', day: 'شنبه', gregorianDate: '2025-12-27' },
-    { name: 'ایمنی شناسی عملی', persianDate: '۷ دی', time: '۱۲:۰۰', day: 'یک‌شنبه', gregorianDate: '2025-12-28' },
-    { name: 'ایمنی شناسی نظری', persianDate: '۲۰ دی', time: '۱۳:۰۰', day: 'شنبه', gregorianDate: '2026-01-10' },
-    { name: 'اصول اپیدمیولوژی', persianDate: '۲۲ دی', time: '۱۲:۰۰', day: 'دوشنبه', gregorianDate: '2026-01-12' },
-    { name: 'پایانترم فیزیک پزشکی', persianDate: '۲۴ دی', time: '۱۳:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-14' },
-    { name: 'انگل شناسی عملی', persianDate: '۲۸ دی', time: '-', day: 'یکشنبه', gregorianDate: '2026-01-18' },
-    { name: 'قارچ شناسی عملی', persianDate: '۲۹ دی', time: '-', day: 'دوشنبه', gregorianDate: '2026-01-19' },
-    { name: 'قارچ شناسی نظری', persianDate: '۳۰ دی', time: '۱۳:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-01-20' },
-    { name: 'تفسیر موضوعی قرآن', persianDate: '۱ بهمن', time: '۰۸:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-21' },
-    { name: 'انگل شناسی نظری', persianDate: '۴ بهمن', time: '۱۳:۰۰', day: 'شنبه', gregorianDate: '2026-01-24' },
-    { name: 'علوم تشریح اعصاب نظری', persianDate: '۸ بهمن', time: '۱۱:۰۰', day: 'چهارشنبه', gregorianDate: '2026-01-28' },
-    { name: 'فیزیولوژی اعصاب و حواس ویژه', persianDate: '۱۱ بهمن', time: '۰۹:۰۰', day: 'شنبه', gregorianDate: '2026-01-31' },
-    { name: 'آزمون جامع علوم پایه کشوری', persianDate: '۲۸ بهمن', time: '۰۸:۰۰', day: 'سه‌شنبه', gregorianDate: '2026-02-17' },
-{ name: 'پاتولوژی عمومی', persianDate: '۶ اسفند', time: '-', day: 'چهارشنبه', gregorianDate: '2026-02-25' }
-];
+        // Function to parse CSV data into an array of objects
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+            const result = [];
 
-        function initTheme() {
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const defaultTheme = systemDark ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', defaultTheme);
-            updateThemeButton(defaultTheme);
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); // Handle commas inside quotes
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header] = values[index] ? values[index].trim().replace(/^"|"$/g, '') : '';
+                });
+                result.push(obj);
+            }
+            return result;
         }
 
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            updateThemeButton(newTheme);
-        }
+        // Function to fetch and process CSV data
+        async function loadExamsFromCSV() {
+            try {
+                const response = await fetch('exams.csv'); // Fetch the CSV file
+                if (!response.ok) {
+                    throw new Error(`Failed to load CSV: ${response.status}`);
+                }
+                const csvData = await response.text();
+                const parsedExams = parseCSV(csvData);
 
-        function updateThemeButton(theme) {
-            const button = document.getElementById('themeToggle');
-            const icon = button.querySelector('.icon path');
-            if (theme === 'dark') {
-                icon.setAttribute('d', 'M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
-            } else {
-                icon.setAttribute('d', 'M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
+                // Convert Gregorian dates to Date objects for calculations
+                parsedExams.forEach(exam => {
+                    exam.gregorianDate = new Date(exam.gregorianDate);
+                });
+
+                return parsedExams;
+            } catch (error) {
+                console.error("Error loading or parsing CSV:", error);
+                document.getElementById('examTableBody').innerHTML = `<tr><td colspan="5">خطا در بارگذاری اطلاعات امتحانات.</td></tr>`;
+                return []; // Return an empty array on failure
             }
         }
 
-        document.addEventListener('DOMContentLoaded', initTheme);
 
-
-        function populateExamTable() {
+        async function populateExamTable() { // Make this function async
             const tableBody = document.getElementById('examTableBody');
             const today = new Date();
 
+            // Clear any initial loading message if needed
+            tableBody.innerHTML = '';
+
+            const exams = await loadExamsFromCSV(); // Wait for exams to be loaded
+
+            if (exams.length === 0) {
+                return; // Exit if loading failed
+            }
+
             const gaps = [];
             for (let i = 1; i < exams.length; i++) {
-                const prevExamDate = new Date(exams[i - 1].gregorianDate);
-                const examDate = new Date(exams[i].gregorianDate);
+                const prevExamDate = exams[i - 1].gregorianDate; // Already a Date object
+                const examDate = exams[i].gregorianDate;         // Already a Date object
                 const daysBetween = Math.ceil((examDate - prevExamDate) / (1000 * 60 * 60 * 24));
                 if (daysBetween > 0) {
                     gaps.push(daysBetween);
@@ -596,12 +598,12 @@ const exams = [
 
             for (let i = 0; i < exams.length; i++) {
                 const exam = exams[i];
-                const examDate = new Date(exam.gregorianDate);
+                const examDate = exam.gregorianDate; // Use the pre-converted Date object
                 const timeDifference = examDate - today;
                 const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
                 if (i > 0) {
-                    const prevExamDate = new Date(exams[i - 1].gregorianDate);
+                    const prevExamDate = exams[i - 1].gregorianDate; // Use the pre-converted Date object
                     const daysBetween = Math.ceil((examDate - prevExamDate) / (1000 * 60 * 60 * 24));
 
                     if (daysBetween > 0) {
@@ -654,9 +656,33 @@ const exams = [
             }
         }
 
+        function initTheme() {
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const defaultTheme = systemDark ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', defaultTheme);
+            updateThemeButton(defaultTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            updateThemeButton(newTheme);
+        }
+
+        function updateThemeButton(theme) {
+            const button = document.getElementById('themeToggle');
+            const icon = button.querySelector('.icon path');
+            if (theme === 'dark') {
+                icon.setAttribute('d', 'M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
+            } else {
+                icon.setAttribute('d', 'M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             initTheme();
-            populateExamTable();
+            populateExamTable(); // Call the async version
         });
     </script>
 </body>
