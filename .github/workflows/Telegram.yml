@@ -32,11 +32,12 @@ jobs:
       - name: Prepare exam data (for daily update and push events)
         id: exam_data
         run: |
+          FOUND_UPCOMING_EXAMS=false
           if [ -f "exams.csv" ]; then
             # Extract exam data, skipping header
             EXAMS_DATA=$(tail -n +2 exams.csv)
             if [ -n "$EXAMS_DATA" ]; then
-              # Process each line to create a list of exams
+              # Process each line to create a list of *upcoming* exams
               echo "EXAM_LIST<<EOF" >> $GITHUB_OUTPUT
               while IFS=',' read -r name persian_date time day gregorian_date || [[ -n "$name" ]]; do
                 # Trim leading/trailing spaces
@@ -56,25 +57,30 @@ jobs:
                     SECONDS_IN_DAY=86400
                     DAYS_REMAINING=$(( (EXAM_TIMESTAMP - CURRENT_TIMESTAMP) / SECONDS_IN_DAY ))
                     
+                    # Only add to list if exam is in the future
                     if [[ $DAYS_REMAINING -gt 0 ]]; then
-                      REMAINING_TEXT=" ($DAYS_REMAINING روز مانده)"
-                    elif [[ $DAYS_REMAINING -eq 0 ]]; then
-                      REMAINING_TEXT=" (امروز!)"
-                    else
-                      REMAINING_TEXT=" ($((-DAYS_REMAINING)) روز گذشته)"
+                        FOUND_UPCOMING_EXAMS=true
+                        REMAINING_TEXT=" ($DAYS_REMAINING روز مانده)"
+                        # Format the exam entry with days remaining
+                        echo "\n• <b>$name</b>\n $day | $persian_date | $time | $REMAINING_TEXT" >> $GITHUB_OUTPUT
+                    # Optional: Log past exams for debugging
+                    # else
+                    #    echo "DEBUG: Skipping past exam '$name' ($gregorian_date)" >&2
                     fi
-                    
-                    # Format the exam entry with days remaining
-                    echo "\n• <b>$name</b>\n $day | $persian_date | $time | $REMAINING_TEXT" >> $GITHUB_OUTPUT
                   else
-                     # Handle invalid date format
+                     # Handle invalid date format - could be skipped or logged as an error
                      echo "\n• <b>$name</b>\n $day | $persian_date | $time | (تاریخ نامعتبر)" >> $GITHUB_OUTPUT
+                     FOUND_UPCOMING_EXAMS=true # Treat invalid dates as needing review
                   fi
                 fi
               done <<< "$EXAMS_DATA"
               echo "EOF" >> $GITHUB_OUTPUT
               
-              echo "FOUND_EXAMS=true" >> $GITHUB_OUTPUT
+              if [[ "$FOUND_UPCOMING_EXAMS" == "true" ]]; then
+                 echo "FOUND_EXAMS=true" >> $GITHUB_OUTPUT
+              else
+                 echo "FOUND_EXAMS=false" >> $GITHUB_OUTPUT
+              fi
             else
               echo "FOUND_EXAMS=false" >> $GITHUB_OUTPUT
             fi
@@ -82,17 +88,22 @@ jobs:
             echo "FOUND_EXAMS=false" >> $GITHUB_OUTPUT
           fi
 
+
       - name: Prepare commit log (for push event only)
         id: commit_log
         if: steps.determine_event.outputs.type == 'commit'
         run: |
           # Get the latest commit details
           COMMITTER=$(git log -1 --pretty=format:'%an')
+          COMMIT_DATE_ISO=$(git log -1 --pretty=format:"%ci") # Full ISO date
+          COMMIT_DATE_SHORT=$(git log -1 --pretty=format:"%cs") # Short date YYYY-MM-DD
           REPO_NAME=${{ github.repository }}
           COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
           COMMIT_SHA=$(git log -1 --pretty=format:"%h")
           
           echo "COMMITTER=$COMMITTER" >> $GITHUB_OUTPUT
+          echo "COMMIT_DATE_ISO=$COMMIT_DATE_ISO" >> $GITHUB_OUTPUT
+          echo "COMMIT_DATE_SHORT=$COMMIT_DATE_SHORT" >> $GITHUB_OUTPUT
           echo "REPO_NAME=$REPO_NAME" >> $GITHUB_OUTPUT
           echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
           echo "COMMIT_SHA=$COMMIT_SHA" >> $GITHUB_OUTPUT
@@ -100,17 +111,12 @@ jobs:
           # Construct the GitHub Pages URL
           PAGES_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
           echo "PAGES_URL=$PAGES_URL" >> $GITHUB_OUTPUT
-          
-          # Get the diff summary for the commit (optional, can be removed if too verbose)
-          # PREV_COMMIT=$(git rev-parse HEAD~1)
-          # DIFF_SUMMARY=$(git diff --shortstat $PREV_COMMIT HEAD)
-          # echo "DIFF_SUMMARY=$DIFF_SUMMARY" >> $GITHUB_OUTPUT
 
 
       # --- Main Notification Logic ---
       
       # Scenario 1: Push event -> Always send exam schedule, potentially with commit info
-      - name: Send Exam Schedule Update (Push Event)
+      - name: Send Upcoming Exams Schedule Update (Push Event)
         if: steps.determine_event.outputs.type == 'commit' && steps.exam_data.outputs.FOUND_EXAMS == 'true'
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -122,8 +128,9 @@ jobs:
           <blockquote expandable>${{ steps.exam_data.outputs.EXAM_LIST }}</blockquote>
           
           <b>🔄 آخرین بروزرسانی:</b>
-          👤 <b>Committer:</b> ${{ steps.commit_log.outputs.COMMITTER }}
-          📝 <b>Commit:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
+          👤 <b>تغییر دهنده:</b> ${{ steps.commit_log.outputs.COMMITTER }}
+          📅 <b>تاریخ کامیت:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }} (ISO: ${{ steps.commit_log.outputs.COMMIT_DATE_ISO }})
+          📝 <b>پیام:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
 
           🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
 
@@ -140,13 +147,13 @@ jobs:
 
           # Check response
           if echo "$RESPONSE" | jq -e .ok >/dev/null 2>&1; then
-            echo "Exam schedule update (with commit info) sent successfully."
+            echo "Upcoming exam schedule update (with commit info) sent successfully."
           else
             echo "Failed to send exam schedule update (with commit info). Response: $RESPONSE"
             exit 1
           fi
 
-      - name: Send Empty Exam Schedule Message (Push Event)
+      - name: Send No Upcoming Exams Message (Push Event)
         if: steps.determine_event.outputs.type == 'commit' && steps.exam_data.outputs.FOUND_EXAMS == 'false'
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -154,11 +161,12 @@ jobs:
         run: |
           MESSAGE="<b>📚 آزمون‌های پیش رو (بروزرسانی شده)</b> 
 
-          ❌ هیچ آزمون ثبت شده‌ای وجود ندارد.
+          ✅ همه آزمون‌ها پشت سر گذاشته شده‌اند یا تاریخ آن‌ها به اتمام رسیده است.
 
           <b>🔄 آخرین بروزرسانی:</b>
-          👤 <b>Committer:</b> ${{ steps.commit_log.outputs.COMMITTER }}
-          📝 <b>Commit:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
+          👤 <b>تغییر دهنده:</b> ${{ steps.commit_log.outputs.COMMITTER }}
+          📅 <b>تاریخ کامیت:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }} (ISO: ${{ steps.commit_log.outputs.COMMIT_DATE_ISO }})
+          📝 <b>پیام:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
 
           🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
 
@@ -173,21 +181,21 @@ jobs:
             "https://api.telegram.org/bot$BOT_TOKEN/sendMessage") # Removed extra space
 
           if echo "$RESPONSE" | jq -e .ok >/dev/null 2>&1; then
-            echo "Empty exam schedule message (with commit info) sent successfully."
+            echo "No upcoming exams message (with commit info) sent successfully."
           else
-            echo "Failed to send empty exam schedule message (with commit info). Response: $RESPONSE"
+            echo "Failed to send no upcoming exams message (with commit info). Response: $RESPONSE"
             exit 1
           fi
 
-      # Scenario 2: Scheduled event -> Send exam schedule without commit info
-      - name: Send Daily Exam Schedule Update (Scheduled Event)
+      # Scenario 2: Scheduled event -> Send upcoming exam schedule without commit info
+      - name: Send Daily Upcoming Exam Schedule Update (Scheduled Event)
         if: steps.determine_event.outputs.type == 'daily_update' && steps.exam_data.outputs.FOUND_EXAMS == 'true'
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           # Create message with HTML formatting for Telegram
-          MESSAGE="<b>📅 زمان‌بندی روزانه آزمون‌ها</b> 
+          MESSAGE="<b>📅 زمان‌بندی روزانه آزمون‌های باقیمانده</b> 
 
           <blockquote expandable>${{ steps.exam_data.outputs.EXAM_LIST }}</blockquote>
 
@@ -206,21 +214,21 @@ jobs:
 
           # Check response
           if echo "$RESPONSE" | jq -e .ok >/dev/null 2>&1; then
-            echo "Daily exam schedule sent successfully."
+            echo "Daily upcoming exam schedule sent successfully."
           else
-            echo "Failed to send daily exam schedule. Response: $RESPONSE"
+            echo "Failed to send daily upcoming exam schedule. Response: $RESPONSE"
             exit 1
           fi
 
-      - name: Send Empty Daily Exam Schedule Message (Scheduled Event)
+      - name: Send No Upcoming Daily Exams Message (Scheduled Event)
         if: steps.determine_event.outputs.type == 'daily_update' && steps.exam_data.outputs.FOUND_EXAMS == 'false'
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="<b>📅 زمان‌بندی روزانه آزمون‌ها</b> 
+          MESSAGE="<b>📅 زمان‌بندی روزانه آزمون‌های باقیمانده</b> 
 
-          ❌ هیچ آزمون ثبت شده‌ای وجود ندارد.
+          ✅ همه آزمون‌ها پشت سر گذاشته شده‌اند یا تاریخ آن‌ها به اتمام رسیده است.
 
           🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
 
@@ -235,40 +243,8 @@ jobs:
             "https://api.telegram.org/bot$BOT_TOKEN/sendMessage") # Removed extra space
 
           if echo "$RESPONSE" | jq -e .ok >/dev/null 2>&1; then
-            echo "Empty daily exam schedule message sent successfully."
+            echo "No upcoming daily exams message sent successfully."
           else
-            echo "Failed to send empty daily exam schedule message. Response: $RESPONSE"
+            echo "Failed to send no upcoming daily exams message. Response: $RESPONSE"
             exit 1
           fi
-
-      # Optional: Keep the original commit-only notification if needed alongside exam updates
-      # This step is commented out as the primary logic now integrates exam schedule and commit info.
-      # - name: Send Commit Notification (Separate)
-      #   if: steps.determine_event.outputs.type == 'commit'
-      #   env:
-      #     BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-      #     CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      #   run: |
-      #     MESSAGE="<b>🚀 New Push to ${{ steps.commit_log.outputs.REPO_NAME }}</b>
-      #
-      #     👤 <b>Committer:</b> ${{ steps.commit_log.outputs.COMMITTER }}
-      #     📝 <b>Commit:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
-      #     "
-      #     
-      #
-      #     RESPONSE=$(curl -s -X POST \
-      #       -H 'Content-Type: application/json' \
-      #       -d "{
-      #         \"chat_id\": \"$CHAT_ID\",
-      #         \"text\": \"$MESSAGE\",
-      #         \"parse_mode\": \"HTML\",
-      #         \"disable_web_page_preview\": true
-      #       }" \
-      #       "https://api.telegram.org/bot$BOT_TOKEN/sendMessage") # Removed extra space
-      #
-      #     if echo "$RESPONSE" | jq -e .ok >/dev/null 2>&1; then
-      #       echo "Commit notification sent successfully."
-      #     else
-      #       echo "Failed to send commit notification. Response: $RESPONSE"
-      #       exit 1
-      #     fi
