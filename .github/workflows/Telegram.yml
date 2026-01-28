@@ -138,7 +138,7 @@ jobs:
           📅 <b>Date:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }}
           📝 <b>Message:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
 
-          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'مشاهده صفحه وب</a>"
+          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه وب</a>"
 
           # Send to Telegram
           RESPONSE=$(curl -s -X POST \
@@ -236,7 +236,7 @@ jobs:
 
           ✅ همه آزمون‌ها پشت سر گذاشته شده‌اند یا تاریخ آن‌ها به اتمام رسیده است.
 
-          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
+          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه وب</a>"
 
           RESPONSE=$(curl -s -X POST \
             -H 'Content-Type: application/json' \
