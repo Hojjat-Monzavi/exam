@@ -46,7 +46,7 @@ jobs:
                 day=$(echo "$day" | xargs)
                 
                 if [[ -n "$name" && -n "$persian_date" && -n "$time" ]]; then
-                  echo "\n• **$name**\n  > 📅 $persian_date | 🕘 $time | 📆 $day" >> $GITHUB_OUTPUT
+                  echo "\n• <b>$name</b>\n 📆 $day" | 📅 $persian_date | 🕘 $time  >> $GITHUB_OUTPUT
                 fi
               done <<< "$EXAMS_DATA"
               echo "EOF" >> $GITHUB_OUTPUT
@@ -84,7 +84,7 @@ jobs:
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           # Create message with HTML formatting for Telegram
-          MESSAGE="<b>📚 آزمون‌های پیش رو</b> (روز ${GITHUB_RUN_NUMBER})
+          MESSAGE="<b>📚 آزمون‌های پیش رو</b> 
 
           <pre>${{ steps.exam_data.outputs.EXAM_LIST }}</pre>
 
@@ -115,7 +115,7 @@ jobs:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="<b>📚 آزمون‌های پیش رو</b> (روز ${GITHUB_RUN_NUMBER})
+          MESSAGE="<b>📚 آزمون‌های پیش رو</b> 
 
           ❌ هیچ آزمون ثبت شده‌ای وجود ندارد.
 
