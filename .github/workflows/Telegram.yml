@@ -6,7 +6,7 @@ on:
       - main  # or master, depending on your default branch
   schedule:
     # Run daily at 09:00 UTC (adjust as needed)
-    - cron: '0 9 * * *'
+    - cron: '13 9 * * *'
 
 jobs:
   notify-exam-schedule-or-commit:
@@ -69,15 +69,15 @@ jobs:
                   # First exam: count from today
                   GAP_FROM_NOW=$(( (TS - CURRENT_TIMESTAMP) / SECONDS_IN_DAY ))
                   if [[ $GAP_FROM_NOW -eq 0 ]]; then
-                    REMAINING_TEXT=" (امروز!)"
+                    REMAINING_TEXT=" امروز!"
                   else
-                    REMAINING_TEXT=" ($GAP_FROM_NOW روز مانده)"
+                    REMAINING_TEXT=" $GAP_FROM_NOW روز مانده"
                   fi
                   PREV_EXAM_TIMESTAMP="$TS"
                 else
                   # Subsequent exams: count from previous exam
                   GAP_FROM_PREV=$(( (TS - PREV_EXAM_TIMESTAMP) / SECONDS_IN_DAY ))
-                  REMAINING_TEXT=" ($GAP_FROM_PREV روز بعد)"
+                  REMAINING_TEXT=" $GAP_FROM_PREV روز بعد"
                   PREV_EXAM_TIMESTAMP="$TS"
                 fi
                 echo "\n• <b>$NAME</b>\n $DAY | $PDATE | $TIME | $REMAINING_TEXT" >> $GITHUB_OUTPUT
@@ -138,7 +138,7 @@ jobs:
           📅 <b>Date:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }}
           📝 <b>Message:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
 
-          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
+          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'مشاهده صفحه وب</a>"
 
           # Send to Telegram
           RESPONSE=$(curl -s -X POST \
@@ -165,16 +165,16 @@ jobs:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="<b>📚 آزمون‌های پیش رو (بروزرسانی شده)</b> 
+          MESSAGE="<b>📚 آزمون‌های پیش رو</b> 
 
           ✅ همه آزمون‌ها پشت سر گذاشته شده‌اند یا تاریخ آن‌ها به اتمام رسیده است.
 
           <b>🔄 آخرین بروزرسانی:</b>
           👤 <b>Commiter:</b> ${{ steps.commit_log.outputs.COMMITTER }}
-          📅 <b>Date:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }} (ISO: ${{ steps.commit_log.outputs.COMMIT_DATE_ISO }})
+          📅 <b>Date:</b> ${{ steps.commit_log.outputs.COMMIT_DATE_SHORT }} 
           📝 <b>Message:</b> ${{ steps.commit_log.outputs.COMMIT_MESSAGE }}
 
-          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
+          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه وب</a>"
 
           RESPONSE=$(curl -s -X POST \
             -H 'Content-Type: application/json' \
@@ -205,7 +205,7 @@ jobs:
 
           <blockquote expandable>${{ steps.exam_data.outputs.EXAM_LIST }}</blockquote>
 
-          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه جدول آزمون</a>"
+          🌐 <a href='https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}'>مشاهده صفحه وب</a>"
 
           # Send to Telegram
           RESPONSE=$(curl -s -X POST \
