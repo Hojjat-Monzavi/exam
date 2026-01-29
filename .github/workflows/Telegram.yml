@@ -6,7 +6,7 @@ on:
       - main  # or master, depending on your default branch
   schedule:
     # Run daily at 09:00 UTC (adjust as needed)
-    - cron: '0 9 * * *'
+    - cron: '13 4 * * *'
 
 jobs:
   notify-exam-schedule-or-commit:
