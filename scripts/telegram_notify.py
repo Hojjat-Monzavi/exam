@@ -171,16 +171,17 @@ def build_exam_list(rows, now=None):
         if prev_date is not None:
             gap = days_between(row["date"], prev_date)
             if gap > 0:
-                out_lines.append(f"\n\n⏳ فاصله تا امتحان بعدی: {gap} روز \n")
-        prev_date = row["date"]
-
-        days_left = days_between(row["date"], now)
-        if days_left > 0:
-            remaining = f"{days_left} روز"
-        elif days_left == 0:
-            remaining = "امروز"
+                remaining = f"{gap} روز بعد"
         else:
-            remaining = "گذشته"
+            days_left = days_between(row["date"], now)
+            if days_left > 0:
+                remaining = f"{days_left} روز"
+            elif days_left == 0:
+                remaining = "امروز"
+            else:
+                remaining = "گذشته"
+                
+        prev_date = row["date"]
 
         out_lines.append(
             f"\n• <b>{row['name']}</b>\n {row['day']} | {row['persian_date']} | {row['time']} | {remaining}"
