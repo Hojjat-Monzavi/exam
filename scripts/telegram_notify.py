@@ -171,7 +171,7 @@ def build_exam_list(rows, now=None):
         if prev_date is not None:
             gap = days_between(row["date"], prev_date)
             if gap > 0:
-                out_lines.append(f"\n\n⏳ فاصله تا امتحان بعدی: {gap} روز")
+                out_lines.append(f"\n\n⏳ فاصله تا امتحان بعدی: {gap} روز \n")
         prev_date = row["date"]
 
         days_left = days_between(row["date"], now)
