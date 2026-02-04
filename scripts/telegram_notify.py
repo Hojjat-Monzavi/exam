@@ -175,7 +175,7 @@ def build_exam_list(rows, now=None):
         else:
             days_left = days_between(row["date"], now)
             if days_left > 0:
-                remaining = f"{days_left} روز"
+                remaining = f"{days_left} روز مانده"
             elif days_left == 0:
                 remaining = "امروز"
             else:
