@@ -184,7 +184,7 @@ def build_exam_list(rows, now=None):
         prev_date = row["date"]
 
         out_lines.append(
-            f"\n• <b>{row['name']}</b>\n {row['day']} | {row['persian_date']} | {row['time']} | {remaining}"
+            f"\n• <b>{row['name']}</b>\n {row['day']} | {row['persian_date']} | {row['time']} | {remaining}\n"
         )
     return "".join(out_lines)
 
