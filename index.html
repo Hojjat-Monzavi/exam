@@ -506,6 +506,60 @@
             });
         }
 
+        function parseGregorianDate(value) {
+            const parts = value.split('-').map(p => p.trim());
+            if (parts.length !== 3) {
+                return new Date(value);
+            }
+            const year = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const day = parseInt(parts[2], 10);
+            return new Date(year, month - 1, day);
+        }
+
+        function toJalali(gy, gm, gd) {
+            const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+            let jy = (gy <= 1600) ? 0 : 979;
+            gy -= (gy <= 1600) ? 621 : 1600;
+            let gy2 = (gm > 2) ? (gy + 1) : gy;
+            let days = (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100)
+                + Math.floor((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
+            jy += 33 * Math.floor(days / 12053);
+            days %= 12053;
+            jy += 4 * Math.floor(days / 1461);
+            days %= 1461;
+            if (days > 365) {
+                jy += Math.floor((days - 1) / 365);
+                days = (days - 1) % 365;
+            }
+            const jm = (days < 186) ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
+            const jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+            return { jy, jm, jd };
+        }
+
+        function getPersianWeekday(date) {
+            const names = ['یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
+            return names[date.getDay()];
+        }
+
+        function formatPersianDate(date) {
+            const months = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور',
+                'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+            const { jy, jm, jd } = toJalali(date.getFullYear(), date.getMonth() + 1, date.getDate());
+            return `${toPersianNumbers(jd)} ${months[jm - 1]}`;
+        }
+
+        function replaceDigitsInTextNodes(root) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+            let node;
+            while ((node = walker.nextNode())) {
+                const updated = toPersianNumbers(node.nodeValue);
+                if (updated !== node.nodeValue) {
+                    node.nodeValue = updated;
+                }
+            }
+        }
+
         function setCookie(name, value, days) {
             let expires = "";
             if (days) {
@@ -547,7 +601,7 @@
         // Function to fetch and process CSV data
         async function loadExamsFromCSV() {
             try {
-                const response = await fetch('exams.csv'); // Fetch the CSV file
+                const response = await fetch('data.csv'); // Fetch the CSV file
                 if (!response.ok) {
                     throw new Error(`Failed to load CSV: ${response.status}`);
                 }
@@ -556,7 +610,9 @@
 
                 // Convert Gregorian dates to Date objects for calculations
                 parsedExams.forEach(exam => {
-                    exam.gregorianDate = new Date(exam.gregorianDate);
+                    exam.gregorianDate = parseGregorianDate(exam.date);
+                    exam.day = getPersianWeekday(exam.gregorianDate);
+                    exam.persianDate = formatPersianDate(exam.gregorianDate);
                 });
 
                 return parsedExams;
@@ -643,7 +699,7 @@
                 }
 
                 row.innerHTML = `
-                    <td class="exam-name">${exam.name}</td>
+                    <td class="exam-name">${exam.title}</td>
                     <td>${toPersianNumbers(exam.persianDate)}</td>
                     <td class="time">${toPersianNumbers(exam.time)}</td>
                     <td>${exam.day}</td>
@@ -682,7 +738,9 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             initTheme();
-            populateExamTable(); // Call the async version
+            populateExamTable().then(() => {
+                replaceDigitsInTextNodes(document.body);
+            });
         });
     </script>
 </body>
