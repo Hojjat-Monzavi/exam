@@ -79,7 +79,7 @@
       --shadow: rgba(0, 0, 0, 0.08);
       --gap-bg: rgba(230, 126, 34, 0.1);
       --gap-text: #d35400;
-      --success-color: #27ae60;
+      --success-color: #1e8449;
       --muted-color: #7f8c8d;
     }
 
@@ -98,7 +98,7 @@
       --shadow: rgba(0, 0, 0, 0.4);
       --gap-bg: rgba(243, 156, 18, 0.15);
       --gap-text: #f39c12;
-      --success-color: #81c784;
+      --success-color: #18866b;
       --muted-color: #757575;
     }
 
@@ -267,6 +267,40 @@
       flex-wrap: wrap;
     }
 
+    .percent-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .percent-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 6px;
+      background: var(--table-header-bg);
+      color: var(--text-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .percent-btn:hover {
+      background: var(--time-color);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .percent-btn:active {
+      transform: scale(0.95);
+    }
+
     .slider-container {
       flex: 3;
       min-width: 160px;
@@ -292,7 +326,7 @@
       -webkit-appearance: none;
       width: 30px;
       height: 30px;
-      background: linear-gradient(135deg, var(--time-color), #2980b9);
+      background: var(--time-color);
       border-radius: 30px;
       margin-top: -10px;
       box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
@@ -316,7 +350,7 @@
     input[type=range]::-moz-range-thumb {
       width: 30px;
       height: 30px;
-      background: linear-gradient(135deg, var(--time-color), #2980b9);
+      background: var(--time-color);
       border-radius: 30px;
       border: 3px solid white;
       cursor: pointer;
@@ -328,7 +362,7 @@
       font-weight: 700;
       color: white;
       text-align: center;
-      background: linear-gradient(135deg, var(--time-color), #2980b9);
+      background: var(--time-color);
       padding: 8px 0;
       border-radius: 40px;
       box-shadow: 0 2px 8px var(--shadow);
@@ -343,7 +377,7 @@
       border-radius: 40px;
       font-size: 1.1rem;
       font-weight: 600;
-      background: linear-gradient(135deg, var(--success-color), #1e8449);
+      background: var(--success-color);
       color: white;
       min-width: 75px;
       text-align: center;
@@ -702,6 +736,19 @@
         const controlRow = document.createElement('div');
         controlRow.className = 'control-row';
 
+        const percentControlsDiv = document.createElement('div');
+        percentControlsDiv.className = 'percent-controls';
+        
+        const upBtn = document.createElement('button');
+        upBtn.className = 'percent-btn';
+        upBtn.innerHTML = '▲';
+        upBtn.setAttribute('aria-label', 'افزایش درصد');
+        
+        const downBtn = document.createElement('button');
+        downBtn.className = 'percent-btn';
+        downBtn.innerHTML = '▼';
+        downBtn.setAttribute('aria-label', 'کاهش درصد');
+
         const sliderDiv = document.createElement('div');
         sliderDiv.className = 'slider-container';
         const slider = document.createElement('input');
@@ -722,6 +769,9 @@
         scoreSpan.id = `score_${index}`;
         scoreSpan.innerText = toPersianNumbers(Math.round((25 / 100) * subject.max));
 
+        percentControlsDiv.appendChild(upBtn);
+        percentControlsDiv.appendChild(downBtn);
+        controlRow.appendChild(percentControlsDiv);
         sliderDiv.appendChild(slider);
         controlRow.appendChild(sliderDiv);
         controlRow.appendChild(percentSpan);
@@ -747,8 +797,28 @@
           updateTotal();
         }
 
+        function changePercent(delta) {
+          const idx = parseInt(slider.dataset.index);
+          let newVal = percentValues[idx] + delta;
+          if (newVal < 0) newVal = 0;
+          if (newVal > 100) newVal = 100;
+          percentValues[idx] = newVal;
+          slider.value = newVal;
+          
+          percentSpan.innerText = toPersianNumbers(newVal + '%');
+          
+          const earned = (newVal / 100) * subjects[idx].max;
+          const earnedRounded = Math.round(earned);
+          scoreSpan.innerText = toPersianNumbers(earnedRounded);
+          
+          updateTotal();
+        }
+
         slider.addEventListener('input', updateRowFromSlider);
         slider.addEventListener('change', updateRowFromSlider);
+        
+        upBtn.addEventListener('click', () => changePercent(1));
+        downBtn.addEventListener('click', () => changePercent(-1));
 
         percentValues[index] = 25;
       });
