@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ماشین حساب علوم پایه</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='currentColor' d='M13.5 13.5h-3v-3h3zm-3-4.5h3V6h-3zm-1.5 9h6v-3h-6zm-3 3h9v-3h-9zm-3-3h3v-3H6zm0-4.5h3v-3H6zm-3 3h3v-3H3zm0 4.5h3v-3H3zm12-12h3V3h-3zm-3 3h3V3h-3zm-3-3h3V3h-3zm-3 3h3V3h-3zm-3-3h3V3H3z'/></svg>">
+
+  <style>
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 100;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Thin.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Light.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-SemiBold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-ExtraBold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-weight: 900;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    }
+
+    :root {
+      --bg-base: #e8ecf1;
+      --bg-pattern: #d4dae3;
+      --container-bg: rgba(255, 255, 255, 0.25);
+      --text-color: #2c3e50;
+      --header-bg: rgba(52, 73, 94, 0.65);
+      --header-text: #ecf0f1;
+      --table-header-bg: rgba(248, 249, 250, 0.4);
+      --border-color: rgba(233, 236, 239, 0.4);
+      --hover-bg: rgba(241, 243, 244, 0.35);
+      --accent-color: #e74c3c;
+      --time-color: #3498db;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --gap-bg: rgba(230, 126, 34, 0.1);
+      --gap-text: #d35400;
+      --success-color: #27ae60;
+      --muted-color: #7f8c8d;
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #0a0a0f;
+      --bg-pattern: #1a1a24;
+      --container-bg: rgba(30, 30, 40, 0.25);
+      --text-color: #e0e0e0;
+      --header-bg: rgba(52, 73, 94, 0.65);
+      --header-text: #f0f0f0;
+      --table-header-bg: rgba(45, 45, 55, 0.4);
+      --border-color: rgba(64, 64, 74, 0.4);
+      --hover-bg: rgba(42, 42, 52, 0.35);
+      --accent-color: #ff9898;
+      --time-color: #64b5f6;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --gap-bg: rgba(243, 156, 18, 0.15);
+      --gap-text: #f39c12;
+      --success-color: #81c784;
+      --muted-color: #757575;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Vazirmatn', 'Vazir', 'B Yekan', 'B Nazanin', 'Tahoma', 'Arial', sans-serif;
+      background-color: var(--bg-base);
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4dae3' stroke-width='1.5'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3Cline x1='50' y1='50' x2='55' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 60px 60px;
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      padding-bottom: 100px;
+      min-height: 100vh;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] body {
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231a1a24' stroke-width='1.5'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3Cline x1='50' y1='50' x2='55' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--container-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 20px var(--shadow);
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 8px 25px var(--shadow);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .container {
+      background: var(--container-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 8px 32px var(--shadow), 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--header-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: var(--header-text);
+      padding: 24px;
+      border-radius: 16px 16px 0 0;
+      margin-bottom: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: none;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0 0 4px 0;
+      font-size: 1.6em;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-shadow: 0 1px 3px var(--shadow);
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 1.1em;
+      font-weight: 400;
+      letter-spacing: 0;
+      opacity: 0.9;
+    }
+
+    .subjects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .subject-card {
+      background: var(--container-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 12px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .subject-card:hover {
+      background: var(--hover-bg);
+      transform: translateX(-2px);
+    }
+
+    .subject-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .subject-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-color);
+      line-height: 1.4;
+    }
+
+    .subject-max {
+      background: var(--table-header-bg);
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--time-color);
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .slider-container {
+      flex: 3;
+      min-width: 160px;
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 44px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      touch-action: pan-y;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      height: 10px;
+      background: rgba(52, 152, 219, 0.2);
+      border-radius: 20px;
+      border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--time-color), #2980b9);
+      border-radius: 30px;
+      margin-top: -10px;
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+      border: 3px solid white;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      box-shadow: 0 6px 16px rgba(52, 152, 219, 0.5);
+    }
+
+    input[type=range]::-moz-range-track {
+      height: 10px;
+      background: rgba(52, 152, 219, 0.2);
+      border-radius: 20px;
+      border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--time-color), #2980b9);
+      border-radius: 30px;
+      border: 3px solid white;
+      cursor: pointer;
+    }
+
+    .percent-value {
+      flex: 0 0 65px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      background: linear-gradient(135deg, var(--time-color), #2980b9);
+      padding: 8px 0;
+      border-radius: 40px;
+      box-shadow: 0 2px 8px var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .score-badge {
+      flex: 0 0 auto;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--success-color), #1e8449);
+      color: white;
+      min-width: 75px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .footer-total {
+      background: var(--header-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: var(--header-text);
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 20px var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+
+    .total-score {
+      font-size: 2rem;
+      font-weight: 800;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px 22px;
+      border-radius: 60px;
+      color: #facc15;
+    }
+
+    .percentage-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.15rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px 18px;
+      border-radius: 30px;
+    }
+
+    .final-percent {
+      font-weight: 800;
+      font-size: 1.7rem;
+      color: #a5f3fc;
+    }
+
+    .reset-btn {
+      display: none;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.85em;
+      color: var(--muted-color);
+    }
+
+    .footer-floating {
+      position: fixed;
+      bottom: 20px;
+      right: 50%;
+      transform: translateX(50%);
+      padding: 12px 20px;
+      border-radius: 16px;
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      z-index: 999;
+      font-size: 0.95em;
+      white-space: nowrap;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] .footer-floating {
+      background: rgba(30, 30, 40, 0.25);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-link-floating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .footer-link-floating:hover {
+      color: var(--accent-color);
+    }
+
+    .tg-icon {
+      width: 22px;
+      height: 22px;
+      filter: invert(10%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .footer-link-floating:hover .tg-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    [data-theme="dark"] .tg-icon {
+      filter: invert(90%);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 12px;
+        padding-bottom: 90px;
+      }
+
+      .header {
+        padding: 14px 18px;
+        border-radius: 14px 14px 0 0;
+      }
+
+      .header h1 {
+        font-size: 1.25em;
+      }
+
+      .subjects-list {
+        padding: 14px;
+        gap: 12px;
+      }
+
+      .footer-total {
+        margin: 0 14px 14px;
+        border-radius: 14px;
+      }
+
+      .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+      }
+
+      .container {
+        border-radius: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subject-name {
+        font-size: 1.1rem;
+      }
+
+      .percent-value {
+        font-size: 1.15rem;
+      }
+
+      .header h1 {
+        font-size: 1.15em;
+      }
+
+      .container {
+        border-radius: 12px;
+      }
+
+      .header {
+        border-radius: 12px 12px 0 0;
+      }
+
+      .footer-floating {
+        bottom: 14px;
+        padding: 10px 16px;
+        font-size: 0.85em;
+        border-radius: 12px;
+        max-width: 92%;
+      }
+
+      .tg-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .subject-card {
+      animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+    }
+
+    .subject-card:nth-child(1) { animation-delay: 0.05s; }
+    .subject-card:nth-child(2) { animation-delay: 0.1s; }
+    .subject-card:nth-child(3) { animation-delay: 0.15s; }
+    .subject-card:nth-child(4) { animation-delay: 0.2s; }
+    .subject-card:nth-child(5) { animation-delay: 0.25s; }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" aria-label="تغییر تم">
+    <svg class="icon" viewBox="0 0 24 24">
+      <path d="M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z" />
+    </svg>
+  </button>
+
+  <div class="container">
+    <div class="header">
+      <h1>ماشین حساب علوم پایه</h1>
+      <h2>درصد پاسخگویی هر درس را وارد کنید</h2>
+    </div>
+
+    <div id="subjectsContainer" class="subjects-list">
+      <!-- dynamic subjects injected via js -->
+    </div>
+
+    <div class="footer-total">
+      <div class="total-row">
+        <span>نمره کل</span>
+        <span class="total-score" id="totalAchieved">۰.۰</span>
+      </div>
+      <div class="percentage-row">
+        <span>درصد کل</span>
+        <span class="final-percent" id="totalPercent">۰٪</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    Brought to You by HOJJAT
+  </div>
+
+  <footer class="footer-floating">
+    <a href="https://t.me/OlumPayeQuestion" target="_blank" class="footer-link-floating">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" class="tg-icon" alt="Telegram" />
+      هر روز کلی سؤال علوم پایه در @OlumPayeQuestion
+    </a>
+  </footer>
+
+<script>
+  function toPersianNumbers(str) {
+    const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+    const englishDigits = '0123456789';
+    return str.toString().replace(/[0-9]/g, function (digit) {
+      return persianDigits[englishDigits.indexOf(digit)];
+    });
+  }
+
+  function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    setCookie('theme', newTheme, 365);
+  }
+
+  const savedTheme = getCookie('theme');
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  (function() {
+    const subjects = [
+      { name: 'آناتومی', max: 35 },
+      { name: 'جنین', max: 7 },
+      { name: 'بافت', max: 10 },
+      { name: 'فیزیولوژی', max: 34 },
+      { name: 'بیوشیمی', max: 20 },
+      { name: 'ایمنی', max: 8 },
+      { name: 'باکتری', max: 15 },
+      { name: 'ویروس', max: 5 },
+      { name: 'قارچ', max: 5 },
+      { name: 'انگل', max: 9 },
+      { name: 'حشره', max: 2 },
+      { name: 'اپید', max: 8 },
+      { name: 'اصول', max: 12 },
+      { name: 'زبان', max: 20 },
+      { name: 'معارف', max: 10 }
+    ];
+
+    const TOTAL_MAX = subjects.reduce((acc, subj) => acc + subj.max, 0);
+
+    const container = document.getElementById('subjectsContainer');
+    const totalAchievedSpan = document.getElementById('totalAchieved');
+    const totalPercentSpan = document.getElementById('totalPercent');
+
+    let percentValues = new Array(subjects.length).fill(25);
+
+    function updateTotal() {
+      let totalAchieved = 0;
+      for (let i = 0; i < subjects.length; i++) {
+        const maxScore = subjects[i].max;
+        const percent = percentValues[i];
+        totalAchieved += (percent / 100) * maxScore;
+      }
+      totalAchieved = Math.round(totalAchieved);
+      const overallPercent = (totalAchieved / TOTAL_MAX) * 100;
+      const percentDisplay = overallPercent.toFixed(1) + '%';
+
+      totalAchievedSpan.innerText = toPersianNumbers(totalAchieved.toFixed(1));
+      totalPercentSpan.innerText = toPersianNumbers(percentDisplay);
+    }
+
+    function buildUI() {
+      container.innerHTML = '';
+
+      subjects.forEach((subject, index) => {
+        const card = document.createElement('div');
+        card.className = 'subject-card';
+        card.style.animationDelay = (index * 0.05) + 's';
+
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'subject-header';
+        headerDiv.innerHTML = `
+          <span class="subject-name">${subject.name}</span>
+          <span class="subject-max">نمره کامل: ${toPersianNumbers(subject.max)}</span>
+        `;
+
+        const controlRow = document.createElement('div');
+        controlRow.className = 'control-row';
+
+        const sliderDiv = document.createElement('div');
+        sliderDiv.className = 'slider-container';
+        const slider = document.createElement('input');
+        slider.type = 'range';
+        slider.min = 0;
+        slider.max = 100;
+        slider.value = 25;
+        slider.step = 1;
+        slider.setAttribute('aria-label', `درصد درس ${subject.name}`);
+
+        const percentSpan = document.createElement('span');
+        percentSpan.className = 'percent-value';
+        percentSpan.id = `percent_${index}`;
+        percentSpan.innerText = toPersianNumbers('۲۵٪');
+
+        const scoreSpan = document.createElement('span');
+        scoreSpan.className = 'score-badge';
+        scoreSpan.id = `score_${index}`;
+        scoreSpan.innerText = toPersianNumbers(Math.round((25 / 100) * subject.max));
+
+        sliderDiv.appendChild(slider);
+        controlRow.appendChild(sliderDiv);
+        controlRow.appendChild(percentSpan);
+        controlRow.appendChild(scoreSpan);
+
+        card.appendChild(headerDiv);
+        card.appendChild(controlRow);
+        container.appendChild(card);
+
+        slider.dataset.index = index;
+
+        function updateRowFromSlider() {
+          const idx = parseInt(slider.dataset.index);
+          const val = parseInt(slider.value, 10);
+          percentValues[idx] = val;
+
+          percentSpan.innerText = toPersianNumbers(val + '%');
+
+          const earned = (val / 100) * subjects[idx].max;
+          const earnedRounded = Math.round(earned);
+          scoreSpan.innerText = toPersianNumbers(earnedRounded);
+
+          updateTotal();
+        }
+
+        slider.addEventListener('input', updateRowFromSlider);
+        slider.addEventListener('change', updateRowFromSlider);
+
+        percentValues[index] = 25;
+      });
+
+      updateTotal();
+    }
+
+    buildUI();
+  })();
+</script>
+</body>
+</html>
