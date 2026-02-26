@@ -357,14 +357,18 @@
     }
 
     .percent-value {
-      flex: 0 0 65px;
-      font-size: 1.3rem;
+      width: 50px;
+      height: 50px;
+      font-size: 0.95rem;
       font-weight: 700;
       color: white;
       text-align: center;
       background: var(--time-color);
-      padding: 8px 0;
-      border-radius: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
       box-shadow: 0 2px 8px var(--shadow);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -373,17 +377,24 @@
 
     .score-badge {
       flex: 0 0 auto;
-      padding: 8px 18px;
-      border-radius: 40px;
-      font-size: 1.1rem;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
       font-weight: 600;
       background: var(--success-color);
       color: white;
-      min-width: 75px;
+      min-width: 60px;
       text-align: center;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .display-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
     }
 
     .footer-total {
@@ -581,7 +592,7 @@
     }
 
     .subject-card {
-      animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+      animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) backwards;
     }
 
     .subject-card:nth-child(1) { animation-delay: 0.05s; }
@@ -730,7 +741,7 @@
         headerDiv.className = 'subject-header';
         headerDiv.innerHTML = `
           <span class="subject-name">${subject.name}</span>
-          <span class="subject-max">نمره کامل: ${toPersianNumbers(subject.max)}</span>
+          <span class="subject-max">تعداد سوالات: ${toPersianNumbers(subject.max)}</span>
         `;
 
         const controlRow = document.createElement('div');
@@ -769,13 +780,17 @@
         scoreSpan.id = `score_${index}`;
         scoreSpan.innerText = toPersianNumbers(Math.round((25 / 100) * subject.max));
 
+        const displayContainer = document.createElement('div');
+        displayContainer.className = 'display-container';
+        displayContainer.appendChild(percentSpan);
+        displayContainer.appendChild(scoreSpan);
+
         percentControlsDiv.appendChild(upBtn);
         percentControlsDiv.appendChild(downBtn);
         controlRow.appendChild(percentControlsDiv);
         sliderDiv.appendChild(slider);
         controlRow.appendChild(sliderDiv);
-        controlRow.appendChild(percentSpan);
-        controlRow.appendChild(scoreSpan);
+        controlRow.appendChild(displayContainer);
 
         card.appendChild(headerDiv);
         card.appendChild(controlRow);
