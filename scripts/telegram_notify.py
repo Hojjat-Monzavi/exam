@@ -254,6 +254,17 @@ def send_telegram_message(bot_token, chat_id, message):
         "text": message,
         "parse_mode": "HTML",
         "disable_web_page_preview": True,
+        "reply_markup": {
+            "inline_keyboard" : [
+                [
+                    {
+                        "text":"🌐مشاهده صفحه وب",
+                        "url" : "https://hojjat-monzavi.github.io/exam/",
+                        "style" : "primary"
+                    }
+                ]
+            ]
+        }
     }
     data = json.dumps(payload).encode("utf-8")
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
