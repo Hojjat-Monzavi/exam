@@ -1,179 +1,178 @@
 <!doctype html>
-<html dir=rtl lang="fa">
+<html dir="rtl" lang="fa">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>امتحانات ترم ۴</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='currentColor' d='M13.5 13.5h-3v-3h3zm-3-4.5h3V6h-3zm-1.5 9h6v-3h-6zm-3 3h9v-3h-9zm-3-3h3v-3H6zm0-4.5h3v-3H6zm-3 3h3v-3H3zm0 4.5h3v-3H3zm12-12h3V3h-3zm-3 3h3V3h-3zm-3-3h3V3h-3zm-3 3h3V3h-3zm-3-3h3V3H3zm12 12h3v-3h-3zm-3 3h3v-3h-3zm-3-3h3v-3h-3zm-3 3h3v-3h-3zm-3-3h3v-3H3z'/></svg>">
+    <title>برنامه امتحانی</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%232c3e50' d='M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z'/></svg>">
 
     <style>
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 100;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Thin.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 300;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Light.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 500;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 600;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-SemiBold.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 800;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-ExtraBold.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Vazirmatn';
-            font-style: normal;
-            font-weight: 900;
-            font-display: swap;
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
-        }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 100; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Thin.woff2') format('woff2'); }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 300; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Light.woff2') format('woff2'); }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2'); }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 500; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2'); }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 600; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-SemiBold.woff2') format('woff2'); }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 700; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2'); }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 800; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-ExtraBold.woff2') format('woff2'); }
+        @font-face { font-family: 'Vazirmatn'; font-style: normal; font-weight: 900; font-display: swap; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2'); }
 
         :root {
             --bg-base: #e8ecf1;
             --bg-pattern: #d4dae3;
-            --container-bg: rgba(255, 255, 255, 0.25);
+            --container-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.45);
             --text-color: #2c3e50;
-            --header-bg: rgba(52, 73, 94, 0.65);
+            --text-secondary: #5a6a7a;
+            --header-bg: rgba(44, 62, 80, 0.80);
             --header-text: #ecf0f1;
-            --table-header-bg: rgba(248, 249, 250, 0.4);
-            --border-color: rgba(233, 236, 239, 0.4);
-            --hover-bg: rgba(241, 243, 244, 0.35);
+            --table-header-bg: rgba(44, 62, 80, 0.07);
+            --border-color: rgba(44, 62, 80, 0.10);
+            --row-even: rgba(255, 255, 255, 0.18);
+            --row-odd: rgba(255, 255, 255, 0.05);
+            --hover-bg: rgba(52, 73, 94, 0.08);
             --accent-color: #e74c3c;
-            --time-color: #3498db;
-            --shadow: rgba(0, 0, 0, 0.08);
-            --gap-bg: rgba(230, 126, 34, 0.1);
-            --gap-text: #d35400;
+            --shadow: rgba(0, 0, 0, 0.10);
+            --gap-bg: rgba(230, 126, 34, 0.08);
+            --gap-text: #b94600;
             --success-color: #27ae60;
-            --muted-color: #7f8c8d;
+            --muted-color: #95a5a6;
+            --tag-active-bg: rgba(44, 62, 80, 0.12);
+            --tag-active-border: rgba(44, 62, 80, 0.35);
+            --tag-hidden-bg: rgba(231, 76, 60, 0.07);
+            --tag-hidden-border: rgba(231, 76, 60, 0.30);
+            --tag-hidden-text: #c0392b;
         }
 
         [data-theme="dark"] {
-            --bg-base: #0a0a0f;
-            --bg-pattern: #1a1a24;
-            --container-bg: rgba(30, 30, 40, 0.25);
-            --text-color: #e0e0e0;
-            --header-bg: rgba(52, 73, 94, 0.65);
-            --header-text: #f0f0f0;
-            --table-header-bg: rgba(45, 45, 55, 0.4);
-            --border-color: rgba(64, 64, 74, 0.4);
-            --hover-bg: rgba(42, 42, 52, 0.35);
-            --accent-color: #ff9898;
-            --time-color: #64b5f6;
-            --shadow: rgba(0, 0, 0, 0.4);
-            --gap-bg: rgba(243, 156, 18, 0.15);
-            --gap-text: #f39c12;
-            --success-color: #81c784;
-            --muted-color: #757575;
+            --bg-base: #0d0f14;
+            --bg-pattern: #161820;
+            --container-bg: rgba(22, 26, 35, 0.40);
+            --glass-border: rgba(255, 255, 255, 0.07);
+            --text-color: #dde3ec;
+            --text-secondary: #7f90a4;
+            --header-bg: rgba(20, 24, 32, 0.85);
+            --header-text: #e8edf5;
+            --table-header-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.07);
+            --row-even: rgba(255, 255, 255, 0.03);
+            --row-odd: rgba(0, 0, 0, 0.10);
+            --hover-bg: rgba(255, 255, 255, 0.06);
+            --accent-color: #ff8a80;
+            --shadow: rgba(0, 0, 0, 0.45);
+            --gap-bg: rgba(243, 156, 18, 0.10);
+            --gap-text: #f0a500;
+            --success-color: #6fcf97;
+            --muted-color: #556070;
+            --tag-active-bg: rgba(255, 255, 255, 0.07);
+            --tag-active-border: rgba(255, 255, 255, 0.18);
+            --tag-hidden-bg: rgba(255, 138, 128, 0.08);
+            --tag-hidden-border: rgba(255, 138, 128, 0.25);
+            --tag-hidden-text: #ff8a80;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Vazirmatn', 'Vazir', 'B Yekan', 'B Nazanin', 'Tahoma', 'Arial', sans-serif;
+            font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
             background-color: var(--bg-base);
-            background-image:
-                url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4dae3' stroke-width='1.5'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3Cline x1='50' y1='50' x2='55' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c8cfd8' stroke-width='1'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3C/g%3E%3C/svg%3E");
             background-size: 60px 60px;
             color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            padding-bottom: 100px;
+            padding: 24px 16px 100px;
             min-height: 100vh;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         [data-theme="dark"] body {
-            background-image:
-                url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231a1a24' stroke-width='1.5'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3Cline x1='50' y1='50' x2='55' y2='45'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231c2030' stroke-width='1'%3E%3Cpath d='M15,15 L15,25 L25,25 L25,15 Z'/%3E%3Cpath d='M35,35 L35,45 L45,45 L45,35 Z'/%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Cpath d='M5,50 Q10,45 15,50'/%3E%3Cpath d='M40,5 L45,10 L40,15'/%3E%3Cline x1='20' y1='40' x2='30' y2='50'/%3E%3C/g%3E%3C/svg%3E");
         }
 
-        .header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: var(--header-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: var(--header-text);
-            padding: 24px;
-            border-radius: 16px 16px 0 0;
-            margin-bottom: 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-        }
-
-        .header h1 {
-            margin: 0 0 4px 0;
-            font-size: 1.6em;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            text-shadow: 0 1px 3px var(--shadow);
-        }
-
-        .header h2 {
-            margin: 0;
-            font-size: 1.1em;
-            font-weight: 400;
-            letter-spacing: 0;
-            opacity: 0.9;
-        }
-
-        .theme-toggle {
+        /* ── Fixed controls ── */
+        .controls-right {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
+        }
+
+        .controls-left {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+/*        .tag-filter-label {
+            font-size: 0.72em;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.03em;
+            padding: 0 4px;
+            text-align: right;
+            display: none; 
+        }
+*/
+
+        .tag-filter-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 13px;
+            border-radius: 12px;
+            border: 1px solid var(--tag-active-border);
+            background: var(--container-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 16px var(--shadow);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.82em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .tag-filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 22px var(--shadow);
+        }
+
+        .tag-filter-btn.tag-hidden {
+            border-color: var(--tag-hidden-border);
+            background: var(--tag-hidden-bg);
+            color: var(--tag-hidden-text);
+        }
+
+        .tag-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success-color);
+            transition: background 0.25s;
+            flex-shrink: 0;
+        }
+
+        .tag-filter-btn.tag-hidden .tag-dot {
+            background: var(--accent-color);
+        }
+
+        /* ── Theme toggle ── */
+        .theme-toggle {
             background: var(--container-bg);
             color: var(--text-color);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 4px 20px var(--shadow);
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -181,623 +180,679 @@
             justify-content: center;
         }
 
-        .theme-toggle:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 25px var(--shadow);
-        }
+        .theme-toggle:hover { transform: scale(1.05) translateY(-2px); }
+        .theme-toggle:active { transform: scale(0.95); }
 
-        .theme-toggle:active {
-            transform: scale(0.95);
-        }
+        .icon { width: 20px; height: 20px; fill: currentColor; transition: all 0.3s ease; }
 
-        .icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+        /* ── Container ── */
         .container {
             background: var(--container-bg);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 16px;
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border-radius: 18px;
             overflow: hidden;
             width: 100%;
-            max-width: 900px;
+            max-width: 860px;
             margin: 0 auto;
-            box-shadow: 0 8px 32px var(--shadow), 0 2px 8px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 40px var(--shadow), 0 1px 0 var(--glass-border) inset;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
         }
 
-        .table-container {
-            background: var(--container-bg);
+        /* ── Header ── */
+        .header {
+            background: var(--header-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            color: var(--header-text);
+            padding: 22px 24px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
+        .header h1 {
+            font-size: 1.45em;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 5px;
+        }
+
+        .header h2 {
+            font-size: 0.95em;
+            font-weight: 400;
+            opacity: 0.75;
+        }
+
+        /* ── Table ── */
         table {
             width: 100%;
             border-collapse: collapse;
-            table-layout: fixed;
         }
 
-        th,
-        td {
-            padding: 14px 10px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.92em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        thead tr {
+            background: var(--table-header-bg);
         }
 
         th {
-            background: var(--table-header-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            font-weight: 600;
+            padding: 13px 12px;
+            text-align: center;
+            font-size: 0.82em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 10;
-            letter-spacing: -0.01em;
-        }
-
-        tr {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        tbody tr {
-            background: var(--container-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-        }
-
-        tr:hover {
-            background: var(--hover-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 13px 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.92em;
+            vertical-align: middle;
+        }
+
+        /* alternating rows */
+        tbody tr:nth-child(even) { background: var(--row-even); }
+        tbody tr:nth-child(odd)  { background: var(--row-odd); }
+
+        tbody tr[data-type="exam"] {
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        tbody tr[data-type="exam"]:hover {
+            background: var(--hover-bg) !important;
             transform: translateX(-2px);
         }
 
-        .days-left {
-            font-weight: 600;
-            color: var(--accent-color);
-        }
+        tbody tr:last-child td { border-bottom: none; }
 
+        /* ── Exam name column ── */
         .exam-name {
             text-align: right;
-            padding-right: 16px;
-            font-weight: 500;
-            white-space: normal;
-            word-break: break-word;
+            padding-right: 18px;
+            font-weight: 600;
+            font-size: 0.94em;
+            line-height: 1.45;
         }
 
+        .exam-name-wrap {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .exam-tag-pill {
+            display: inline-block;
+            font-size: 0.68em;
+            font-weight: 600;
+            line-height: 1;
+            padding: 3px 7px;
+            border-radius: 5px;
+            background: var(--tag-active-bg);
+            border: 1px solid var(--tag-active-border);
+            color: var(--text-secondary);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ── Days left ── */
+        .days-left {
+            font-weight: 700;
+            font-size: 0.95em;
+        }
+
+        .days-left.future  { color: var(--accent-color); }
+        .days-left.today   { color: var(--success-color); }
+        .days-left.passed  { color: var(--muted-color); font-weight: 400; }
+
+        /* ── Time column ── */
         .time {
             font-weight: 600;
-            color: var(--time-color);
+            font-variant-numeric: tabular-nums;
+            direction: ltr;
+            unicode-bidi: embed;
         }
 
-        .gap-indicator {
-            background: var(--gap-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            color: var(--gap-text);
-            text-align: center;
-            padding: 8px;
-            font-size: 0.85em;
+        /* ── Date column ── */
+        .date-cell {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* ── Day column - hidden on very small screens ── */
+        .col-day { white-space: nowrap; }
+
+        /* ── Gap indicator ── */
+        .gap-row td {
+            padding: 7px 16px;
+            font-size: 0.8em;
             font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
             font-style: italic;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--gap-text);
+            background: var(--gap-bg) !important;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
         }
 
-        .gap-indicator-long {
-            --gap-bg: rgba(39, 174, 96, 0.1);
-            --gap-text: #27ae60;
+        .gap-row.gap-long td {
+            --gap-bg: rgba(39, 174, 96, 0.08);
+            --gap-text: #1e8449;
         }
 
-        .gap-indicator-short {
-            --gap-bg: rgba(192, 57, 43, 0.08);
-            --gap-text: #c0392b;
+        .gap-row.gap-short td {
+            --gap-bg: rgba(192, 57, 43, 0.06);
+            --gap-text: #a93226;
         }
 
-        [data-theme="dark"] .gap-indicator-long {
-            --gap-bg: rgba(130, 224, 170, 0.15);
-            --gap-text: #82e0aa;
+        [data-theme="dark"] .gap-row.gap-long td {
+            --gap-bg: rgba(111, 207, 151, 0.10);
+            --gap-text: #6fcf97;
         }
 
-        [data-theme="dark"] .gap-indicator-short {
-            --gap-bg: rgba(235, 152, 138, 0.15);
-            --gap-text: #eb988a;
+        [data-theme="dark"] .gap-row.gap-short td {
+            --gap-bg: rgba(255, 138, 128, 0.10);
+            --gap-text: #ff8a80;
         }
 
-        .today {
-            color: var(--success-color) !important;
-            font-weight: 600;
+        .gap-icon {
+            width: 13px;
+            height: 13px;
+            vertical-align: -2px;
+            margin-left: 5px;
+            fill: currentColor;
+            display: inline-block;
         }
 
-        .passed {
-            color: var(--muted-color) !important;
-            opacity: 0.7;
+        /* ── Loading / empty ── */
+        .loading-cell {
+            text-align: center;
+            padding: 32px;
+            color: var(--muted-color);
+            font-size: 0.9em;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 12px;
-                padding-bottom: 90px;
-            }
-
-            .header {
-                padding: 14px 18px;
-                border-radius: 14px 14px 0 0;
-            }
-
-            .header h1 {
-                font-size: 1.25em;
-            }
-
-            table {
-                min-width: 100%;
-                font-size: 0.95em;
-            }
-
-            th,
-            td {
-                padding: 10px 6px;
-            }
-
-            .exam-name {
-                padding-right: 10px;
-                max-width: 120px;
-                word-wrap: break-word;
-            }
-
-            .theme-toggle {
-                top: 15px;
-                right: 15px;
-                width: 44px;
-                height: 44px;
-            }
-
-            .container {
-                border-radius: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-
-            th,
-            td {
-                padding: 8px 4px;
-                font-size: 0.9em;
-            }
-
-            .header h1 {
-                font-size: 1.15em;
-            }
-
-            .exam-name {
-                max-width: 100px;
-            }
-
-            .container {
-                border-radius: 12px;
-            }
-
-            .header {
-                border-radius: 12px 12px 0 0;
-            }
-        }
-
+        /* ── Footer ── */
         .footer-floating {
             position: fixed;
-            bottom: 20px;
+            bottom: 18px;
             right: 50%;
             transform: translateX(50%);
-            padding: 12px 20px;
-            border-radius: 16px;
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            background: rgba(255, 255, 255, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+            padding: 11px 18px;
+            border-radius: 14px;
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            background: var(--container-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--shadow);
             z-index: 999;
-            font-size: 0.95em;
+            font-size: 0.88em;
             white-space: nowrap;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .footer-floating:hover {
             transform: translateX(50%) translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        [data-theme="dark"] .footer-floating {
-            background: rgba(30, 30, 40, 0.25);
-            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 40px var(--shadow);
         }
 
         .footer-link-floating {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: color 0.2s;
         }
 
-        .footer-link-floating:hover {
-            color: var(--accent-color);
-        }
+        .footer-link-floating:hover { color: var(--accent-color); }
 
         .tg-icon {
-            width: 22px;
-            height: 22px;
-            filter: invert(10%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 20px;
+            height: 20px;
+            filter: invert(15%);
+            transition: transform 0.3s ease;
         }
 
-        .footer-link-floating:hover .tg-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
+        [data-theme="dark"] .tg-icon { filter: invert(85%); }
+        .footer-link-floating:hover .tg-icon { transform: scale(1.1) rotate(5deg); }
 
-        [data-theme="dark"] .tg-icon {
-            filter: invert(90%);
-        }
-
-        @media (max-width: 600px) {
-            .footer-floating {
-                bottom: 14px;
-                padding: 10px 16px;
-                font-size: 0.85em;
-                border-radius: 12px;
-                max-width: 92%;
-            }
-
-            .tg-icon {
-                width: 18px;
-                height: 18px;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        tr {
-            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-        }
-
-        tr:nth-child(1) {
-            animation-delay: 0.05s;
-        }
-
-        tr:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        tr:nth-child(3) {
-            animation-delay: 0.15s;
-        }
-
-        tr:nth-child(4) {
-            animation-delay: 0.2s;
-        }
-
-        tr:nth-child(5) {
-            animation-delay: 0.25s;
-        }
-
+        /* ── Copyright ── */
         .copyright {
             text-align: center;
-            margin-top: 20px;
-            font-size: 0.85em;
+            margin-top: 18px;
+            font-size: 0.78em;
             color: var(--muted-color);
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        tbody tr[data-type="exam"] {
+            animation: fadeSlideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            body { padding: 14px 12px 90px; }
+
+            .header { padding: 18px 16px; }
+            .header h1 { font-size: 1.2em; }
+            .header h2 { font-size: 0.85em; }
+
+            th, td { padding: 11px 8px; font-size: 0.87em; }
+            .exam-name { padding-right: 12px; }
+
+            .controls-right { top: 14px; right: 14px; }
+            .controls-left  { top: 14px; left: 14px; }
+
+            .theme-toggle { width: 42px; height: 42px; border-radius: 12px; }
+            .tag-filter-btn { padding: 6px 11px; font-size: 0.78em; border-radius: 10px; }
+        }
+
+        @media (max-width: 520px) {
+            .col-day { display: none; }
+
+            th, td { padding: 10px 6px; font-size: 0.84em; }
+            .exam-name { padding-right: 10px; font-size: 0.88em; }
+
+            .footer-floating {
+                bottom: 12px;
+                padding: 9px 14px;
+                font-size: 0.78em;
+                border-radius: 11px;
+                max-width: 90vw;
+            }
+
+            .tg-icon { width: 17px; height: 17px; }
+        }
+
+        @media (max-width: 380px) {
+            th, td { padding: 9px 5px; font-size: 0.80em; }
         }
     </style>
 </head>
 
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" aria-label="تغییر تم">
-        <svg class="icon" viewBox="0 0 24 24">
-            <path
-                d="M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z" />
-        </svg>
-    </button>
+
+    <!-- Tag filter buttons – upper left -->
+    <div class="controls-left" id="controlsLeft">
+        <!-- Tag buttons injected by JS -->
+    </div>
+
+    <!-- Theme toggle – upper right -->
+    <div class="controls-right">
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" aria-label="تغییر تم">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path d="M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z"/>
+            </svg>
+        </button>
+    </div>
+
     <div class="container">
         <div class="header">
-            <div class="header-title">
-                <h1>برنامه آزمون های نیمسال دوم ۱۴۰۴</h1>
-                <h2>پزشکی بهمن ورودی ۴۰۲</h2>
-            </div>
+            <h1>برنامه آزمون‌های نیمسال اول 1405</h1>
+            <h2>پزشکی بهمن ورودی ۴۰۲</h2>
         </div>
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>نام امتحان</th>
+                        <th style="text-align:right; padding-right:18px;">نام امتحان</th>
                         <th>تاریخ</th>
                         <th>ساعت</th>
-                        <th>روز</th>
-                        <th>روزهای باقی‌مانده</th>
+                        <th class="col-day">روز</th>
+                        <th>باقی‌مانده</th>
                     </tr>
                 </thead>
                 <tbody id="examTableBody">
-                    <!-- Exams will be populated by JavaScript from CSV -->
-                    <tr><td colspan="5" class="loading">در حال بارگذاری...</td></tr>
+                    <tr><td colspan="5" class="loading-cell">در حال بارگذاری…</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="copyright">
-        Brought to You by HOJJAT
-    </div>
+    <p class="copyright">Brought to You by HOJJAT</p>
 
     <footer class="footer-floating">
-        <a href="https://t.me/OlumPayeQuestion  " target="_blank" class="footer-link-floating">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg  " class="tg-icon"
-                alt="Telegram" />
+        <a href="https://t.me/OlumPayeQuestion" target="_blank" class="footer-link-floating">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" class="tg-icon" alt="Telegram">
             هر روز کلی سؤال علوم پایه در @OlumPayeQuestion
         </a>
     </footer>
 
     <script>
-        function toPersianNumbers(str) {
-            const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
-            const englishDigits = '0123456789';
-            return str.toString().replace(/[0-9]/g, function (digit) {
-                return persianDigits[englishDigits.indexOf(digit)];
-            });
+    // ── Persian number helper ──────────────────────────────────────────────
+    const PD = '۰۱۲۳۴۵۶۷۸۹';
+    function toPersian(str) {
+        return String(str).replace(/[0-9]/g, d => PD[+d]);
+    }
+
+    // Replace all text-node digits in a subtree
+    function persianizeTree(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        let node;
+        while ((node = walker.nextNode())) {
+            const updated = toPersian(node.nodeValue);
+            if (updated !== node.nodeValue) node.nodeValue = updated;
         }
+    }
 
-        function parseGregorianDate(value) {
-            const parts = value.split('-').map(p => p.trim());
-            if (parts.length !== 3) {
-                return new Date(value);
-            }
-            const year = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10);
-            const day = parseInt(parts[2], 10);
-            return new Date(year, month - 1, day);
+    // ── Jalali → Gregorian ────────────────────────────────────────────────
+    function jalaliToGregorian(jy, jm, jd) {
+        let gy = jy <= 979 ? 621 : 1600;
+        jy -= jy <= 979 ? 0 : 979;
+        let days = (365 * jy) +
+            (Math.floor(jy / 33) * 8) +
+            Math.floor(((jy % 33) + 3) / 4) +
+            78 + jd +
+            (jm < 7 ? (jm - 1) * 31 : (jm - 7) * 30 + 186);
+
+        gy += 400 * Math.floor(days / 146097);
+        days %= 146097;
+        if (days > 36524) {
+            gy += 100 * Math.floor(--days / 36524);
+            days %= 36524;
+            if (days >= 365) days++;
         }
-
-        function toJalali(gy, gm, gd) {
-            const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-            let jy = (gy <= 1600) ? 0 : 979;
-            gy -= (gy <= 1600) ? 621 : 1600;
-            let gy2 = (gm > 2) ? (gy + 1) : gy;
-            let days = (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100)
-                + Math.floor((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
-            jy += 33 * Math.floor(days / 12053);
-            days %= 12053;
-            jy += 4 * Math.floor(days / 1461);
-            days %= 1461;
-            if (days > 365) {
-                jy += Math.floor((days - 1) / 365);
-                days = (days - 1) % 365;
-            }
-            const jm = (days < 186) ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
-            const jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
-            return { jy, jm, jd };
+        gy += 4 * Math.floor(days / 1461);
+        days %= 1461;
+        if (days > 365) {
+            gy += Math.floor((days - 1) / 365);
+            days = (days - 1) % 365;
         }
+        let gd = days + 1;
+        const leap = (gy % 4 === 0 && gy % 100 !== 0) || gy % 400 === 0;
+        const monthDays = [0, 31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        let gm = 1;
+        while (gm <= 12 && gd > monthDays[gm]) { gd -= monthDays[gm]; gm++; }
+        // Return a UTC midnight date to avoid DST/timezone surprises
+        return new Date(Date.UTC(gy, gm - 1, gd));
+    }
 
-        function getPersianWeekday(date) {
-            const names = ['یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
-            return names[date.getDay()];
-        }
+    const WEEKDAYS = ['یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'];
+    const MONTHS   = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
 
-        function formatPersianDate(date) {
-            const months = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور',
-                'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
-            const { jy, jm, jd } = toJalali(date.getFullYear(), date.getMonth() + 1, date.getDate());
-            return `${toPersianNumbers(jd)} ${months[jm - 1]}`;
-        }
-
-        function replaceDigitsInTextNodes(root) {
-            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
-            let node;
-            while ((node = walker.nextNode())) {
-                const updated = toPersianNumbers(node.nodeValue);
-                if (updated !== node.nodeValue) {
-                    node.nodeValue = updated;
-                }
-            }
-        }
-
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
-
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
-
-        // Function to parse CSV data into an array of objects
-        function parseCSV(csv) {
-            const lines = csv.trim().split('\n');
-            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-            const result = [];
-
-            for (let i = 1; i < lines.length; i++) {
-                const values = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); // Handle commas inside quotes
-                const obj = {};
-                headers.forEach((header, index) => {
-                    obj[header] = values[index] ? values[index].trim().replace(/^"|"$/g, '') : '';
-                });
-                result.push(obj);
-            }
-            return result;
-        }
-
-        // Function to fetch and process CSV data
-        async function loadExamsFromCSV() {
-            try {
-                const response = await fetch('data.csv'); // Fetch the CSV file
-                if (!response.ok) {
-                    throw new Error(`Failed to load CSV: ${response.status}`);
-                }
-                const csvData = await response.text();
-                const parsedExams = parseCSV(csvData);
-
-                // Convert Gregorian dates to Date objects for calculations
-                parsedExams.forEach(exam => {
-                    exam.gregorianDate = parseGregorianDate(exam.date);
-                    exam.day = getPersianWeekday(exam.gregorianDate);
-                    exam.persianDate = formatPersianDate(exam.gregorianDate);
-                });
-
-                return parsedExams;
-            } catch (error) {
-                console.error("Error loading or parsing CSV:", error);
-                document.getElementById('examTableBody').innerHTML = `<tr><td colspan="5">خطا در بارگذاری اطلاعات امتحانات.</td></tr>`;
-                return []; // Return an empty array on failure
-            }
-        }
-
-
-        async function populateExamTable() { // Make this function async
-            const tableBody = document.getElementById('examTableBody');
-            const today = new Date();
-
-            // Clear any initial loading message if needed
-            tableBody.innerHTML = '';
-
-            const exams = await loadExamsFromCSV(); // Wait for exams to be loaded
-
-            if (exams.length === 0) {
-                return; // Exit if loading failed
-            }
-
-            const gaps = [];
-            for (let i = 1; i < exams.length; i++) {
-                const prevExamDate = exams[i - 1].gregorianDate; // Already a Date object
-                const examDate = exams[i].gregorianDate;         // Already a Date object
-                const daysBetween = Math.ceil((examDate - prevExamDate) / (1000 * 60 * 60 * 24));
-                if (daysBetween > 0) {
-                    gaps.push(daysBetween);
-                }
-            }
-            gaps.sort((a, b) => a - b);
-
-            const thresholdCount = Math.max(1, Math.floor(gaps.length * 0.25));
-            const shortThreshold = gaps[thresholdCount - 1];
-            const longThreshold = gaps[gaps.length - thresholdCount];
-
-            for (let i = 0; i < exams.length; i++) {
-                const exam = exams[i];
-                const examDate = exam.gregorianDate; // Use the pre-converted Date object
-                const timeDifference = examDate - today;
-                const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-
-                if (i > 0) {
-                    const prevExamDate = exams[i - 1].gregorianDate; // Use the pre-converted Date object
-                    const daysBetween = Math.ceil((examDate - prevExamDate) / (1000 * 60 * 60 * 24));
-
-                    if (daysBetween > 0) {
-                        let gapClass = 'gap-indicator';
-                        if (daysBetween >= longThreshold) {
-                            gapClass += ' gap-indicator-long';
-                        } else if (daysBetween <= shortThreshold) {
-                            gapClass += ' gap-indicator-short';
-                        }
-
-                        const gapRow = document.createElement('tr');
-                        gapRow.innerHTML = `
-                            <td colspan="5" class="${gapClass}">
-                                <svg class="icon" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
-                                </svg>
-                                فاصله تا امتحان بعدی: ${toPersianNumbers(daysBetween)} روز
-                            </td>
-                        `;
-                        tableBody.appendChild(gapRow);
-                    }
-                }
-
-                const row = document.createElement('tr');
-
-                let daysLeftText = '';
-                let daysLeftClass = 'days-left';
-
-                if (daysLeft > 0) {
-                    daysLeftText = toPersianNumbers(daysLeft) + ' روز';
-                } else if (daysLeft === 0) {
-                    daysLeftText = 'امروز';
-                    daysLeftClass += ' today';
-                } else {
-                    daysLeftText = 'گذشته';
-                    daysLeftClass += ' passed';
-                }
-
-                row.innerHTML = `
-                    <td class="exam-name">${exam.title}</td>
-                    <td>${toPersianNumbers(exam.persianDate)}</td>
-                    <td class="time">${toPersianNumbers(exam.time)}</td>
-                    <td>${exam.day}</td>
-                    <td class="${daysLeft === 0 ? 'today' : daysLeft < 0 ? 'passed' : 'days-left'}">
-                        ${daysLeftText}
-                    </td>
-                `;
-
-                tableBody.appendChild(row);
-            }
-        }
-
-        function initTheme() {
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const defaultTheme = systemDark ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', defaultTheme);
-            updateThemeButton(defaultTheme);
-        }
-
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            updateThemeButton(newTheme);
-        }
-
-        function updateThemeButton(theme) {
-            const button = document.getElementById('themeToggle');
-            const icon = button.querySelector('.icon path');
-            if (theme === 'dark') {
-                icon.setAttribute('d', 'M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
+    // ── CSV parser ────────────────────────────────────────────────────────
+    // Splits a CSV line respecting double-quoted fields
+    function splitCSVLine(line) {
+        const result = [];
+        let field = '';
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+            const ch = line[i];
+            if (ch === '"') {
+                if (inQuotes && line[i + 1] === '"') { field += '"'; i++; }
+                else { inQuotes = !inQuotes; }
+            } else if (ch === ',' && !inQuotes) {
+                result.push(field.trim());
+                field = '';
             } else {
-                icon.setAttribute('d', 'M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z');
+                field += ch;
             }
         }
+        result.push(field.trim());
+        return result;
+    }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            initTheme();
-            populateExamTable().then(() => {
-                replaceDigitsInTextNodes(document.body);
-            });
+    function parseCSV(csv) {
+        const lines = csv.trim().split('\n').filter(l => l.trim() !== '');
+        const headers = splitCSVLine(lines[0]);
+        return lines.slice(1).map(line => {
+            const values = splitCSVLine(line);
+            const obj = {};
+            headers.forEach((h, i) => { obj[h] = values[i] ?? ''; });
+            return obj;
         });
+    }
+
+    // ── Tag parser ────────────────────────────────────────────────────────
+    function parseTags(tagStr) {
+        if (!tagStr || !tagStr.trim()) return [];
+        return tagStr.split(',')
+            .map(t => t.trim().replace(/^['"`]|['"`]$/g, '').trim())
+            .filter(t => t.length > 0);
+    }
+
+    // ── State ─────────────────────────────────────────────────────────────
+    let hiddenTags = new Set();
+
+    // ── Load CSV ──────────────────────────────────────────────────────────
+    async function loadExams() {
+        const response = await fetch('data.csv');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const raw = await response.text();
+        const rows = parseCSV(raw);
+
+        return rows.map(row => {
+            const parts = (row.date || '').split('-').map(p => parseInt(p, 10));
+            let gregorianDate = null, dayName = '—', persianDate = '—';
+
+            if (parts.length === 3 && parts.every(n => !isNaN(n))) {
+                const [jy, jm, jd] = parts;
+                gregorianDate = jalaliToGregorian(jy, jm, jd);
+                // getUTCDay: 0=Sun … 6=Sat  → our WEEKDAYS array: 0=Sun
+                dayName    = WEEKDAYS[gregorianDate.getUTCDay()];
+                persianDate = `${toPersian(jd)} ${MONTHS[jm - 1]}`;
+            }
+
+            return {
+                title: row.title || '',
+                time:  row.time  || '',
+                tags:  parseTags(row.tags || ''),
+                gregorianDate,
+                dayName,
+                persianDate,
+            };
+        }).filter(e => e.gregorianDate !== null);
+    }
+
+    // ── Gap classification ────────────────────────────────────────────────
+    function classifyGaps(exams) {
+        const diffs = [];
+        for (let i = 1; i < exams.length; i++) {
+            const d = (exams[i].gregorianDate - exams[i-1].gregorianDate) / 86400000;
+            if (d > 0) diffs.push(d);
+        }
+        if (diffs.length === 0) return { short: 0, long: Infinity };
+        const sorted = [...diffs].sort((a, b) => a - b);
+        const q = Math.max(1, Math.floor(sorted.length * 0.25));
+        return { short: sorted[q - 1], long: sorted[sorted.length - q] };
+    }
+
+    // ── Render table ──────────────────────────────────────────────────────
+    function renderTable(exams) {
+        const tbody = document.getElementById('examTableBody');
+        tbody.innerHTML = '';
+
+        // UTC midnight for today
+        const now = new Date();
+        const todayUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+
+        const { short: shortThreshold, long: longThreshold } = classifyGaps(exams);
+        // Store globally so createGapRow can use them
+        gapShortThreshold = shortThreshold;
+        gapLongThreshold  = longThreshold;
+
+        let animDelay = 0;
+
+        for (let i = 0; i < exams.length; i++) {
+            const exam = exams[i];
+
+            // Gap rows are NOT inserted here — applyTagFilter() builds them all
+
+            // ── Exam row ──
+            const examTs = exam.gregorianDate.getTime();
+            const daysLeft = Math.round((examTs - todayUTC) / 86400000);
+
+            let daysText, daysClass;
+            if (daysLeft > 0)       { daysText = toPersian(daysLeft) + ' روز'; daysClass = 'days-left future'; }
+            else if (daysLeft === 0) { daysText = 'امروز';                       daysClass = 'days-left today'; }
+            else                    { daysText = 'گذشته';                        daysClass = 'days-left passed'; }
+
+            const tagPillsHTML = exam.tags.length
+                ? exam.tags.map(t => `<span class="exam-tag-pill">${t}</span>`).join('')
+                : '';
+
+            const tr = document.createElement('tr');
+            tr.dataset.type      = 'exam';
+            tr.dataset.index     = i;
+            tr.dataset.tags      = JSON.stringify(exam.tags);
+            tr.dataset.timestamp = exam.gregorianDate.getTime(); // for gap recalculation
+            tr.style.animationDelay = `${animDelay}ms`;
+            animDelay = Math.min(animDelay + 40, 400);
+
+            tr.innerHTML = `
+                <td class="exam-name"><div class="exam-name-wrap">${exam.title}${tagPillsHTML}</div></td>
+                <td class="date-cell">${exam.persianDate}</td>
+                <td class="time">${toPersian(exam.time)}</td>
+                <td class="col-day">${exam.dayName}</td>
+                <td><span class="${daysClass}">${daysText}</span></td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        applyTagFilter();
+    }
+
+    // Global gap thresholds (set once from all exams, used when re-rendering gaps)
+    let gapShortThreshold = 0;
+    let gapLongThreshold  = Infinity;
+
+    // ── Build a single gap <tr> ───────────────────────────────────────────
+    function createGapRow(days) {
+        let cls = 'gap-row';
+        if (days >= gapLongThreshold)       cls += ' gap-long';
+        else if (days <= gapShortThreshold) cls += ' gap-short';
+
+        const tr = document.createElement('tr');
+        tr.dataset.type = 'gap';
+        tr.className    = cls;
+        tr.innerHTML = `<td colspan="5">
+            <svg class="gap-icon" viewBox="0 0 24 24"><path d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/></svg>
+            فاصله تا امتحان بعدی: ${toPersian(days)} روز
+        </td>`;
+        return tr;
+    }
+
+    // ── Tag filter ────────────────────────────────────────────────────────
+    function applyTagFilter() {
+        const tbody = document.getElementById('examTableBody');
+
+        // 1. Remove ALL existing gap rows — we'll rebuild them
+        tbody.querySelectorAll('tr[data-type="gap"]').forEach(r => r.remove());
+
+        // 2. Show/hide exam rows based on tags
+        const examRows = Array.from(tbody.querySelectorAll('tr[data-type="exam"]'));
+        examRows.forEach(row => {
+            const tags    = JSON.parse(row.dataset.tags || '[]');
+            const hideRow = tags.some(t => hiddenTags.has(t));
+            row.style.display = hideRow ? 'none' : '';
+        });
+
+        // 3. Reinsert gap rows between consecutive VISIBLE exam rows
+        //    with freshly-calculated day differences
+        const visibleRows = examRows.filter(r => r.style.display !== 'none');
+        for (let i = 1; i < visibleRows.length; i++) {
+            const prevTs = parseInt(visibleRows[i - 1].dataset.timestamp);
+            const currTs = parseInt(visibleRows[i].dataset.timestamp);
+            const days   = Math.round((currTs - prevTs) / 86400000);
+            if (days > 0) {
+                const gapTr = createGapRow(days);
+                tbody.insertBefore(gapTr, visibleRows[i]);
+            }
+        }
+    }
+
+    // ── Build tag filter buttons ──────────────────────────────────────────
+    function buildTagFilters(allTags) {
+        const container   = document.getElementById('controlsLeft');
+        // Remove existing tag buttons (keep the label)
+        container.querySelectorAll('.tag-filter-btn').forEach(b => b.remove());
+
+        allTags.forEach(tag => {
+            const btn = document.createElement('button');
+            btn.className = 'tag-filter-btn';
+            btn.dataset.tag = tag;
+            btn.innerHTML = `<span class="tag-dot"></span>${tag}`;
+            btn.addEventListener('click', () => {
+                if (hiddenTags.has(tag)) hiddenTags.delete(tag);
+                else                     hiddenTags.add(tag);
+                updateTagButtons(allTags);
+                applyTagFilter();
+            });
+            container.appendChild(btn);
+        });
+
+        updateTagButtons(allTags);
+    }
+
+    function updateTagButtons(allTags) {
+        allTags.forEach(tag => {
+            const btn = document.querySelector(`.tag-filter-btn[data-tag="${tag}"]`);
+            if (!btn) return;
+            if (hiddenTags.has(tag)) btn.classList.add('tag-hidden');
+            else                     btn.classList.remove('tag-hidden');
+        });
+    }
+
+    // ── Theme ─────────────────────────────────────────────────────────────
+    function initTheme() {
+        const stored = localStorage.getItem('theme');
+        const theme  = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        updateThemeIcon(theme);
+    }
+
+    function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next    = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+        const path = document.querySelector('#themeToggle .icon path');
+        if (!path) return;
+        path.setAttribute('d', theme === 'dark'
+            ? 'M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z'
+            : 'M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z'
+        );
+    }
+
+    // ── Boot ──────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', async () => {
+        initTheme();
+        try {
+            const exams = await loadExams();
+
+            // Collect unique tags in order of appearance
+            const seenTags = [];
+            exams.forEach(e => e.tags.forEach(t => { if (!seenTags.includes(t)) seenTags.push(t); }));
+
+            buildTagFilters(seenTags);
+            renderTable(exams);
+            persianizeTree(document.body);
+        } catch (err) {
+            console.error(err);
+            document.getElementById('examTableBody').innerHTML =
+                `<tr><td colspan="5" class="loading-cell">خطا در بارگذاری اطلاعات امتحانات.</td></tr>`;
+        }
+    });
     </script>
 </body>
-
 </html>
