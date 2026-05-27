@@ -314,13 +314,11 @@ def main():
             f"👤 <b>Committer:</b> {commit['committer']}\n"
             f"📅 <b>Date:</b> {commit['commit_date_short']}\n"
             f"📝 <b>Message:</b> {commit['commit_message']}\n\n"
-            f"🌐 <a href='{pages_url}'>مشاهده صفحه وب</a>"
         )
     elif event_type == "daily_update":
         message = (
             "<b>📅 زمان‌بندی روزانه آزمون‌های باقیمانده</b>\n\n"
             f"{schedule_block}"
-            f"🌐 <a href='{pages_url}'>مشاهده صفحه وب</a>"
         )
     else:
         eprint(f"Unknown EVENT_TYPE: {event_type!r}")
