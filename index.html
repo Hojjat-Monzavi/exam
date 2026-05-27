@@ -527,12 +527,14 @@
 
     <p class="copyright">Brought to You by HOJJAT</p>
 
+    <!-- Disabling footer for now -->
+    <!-- 
     <footer class="footer-floating">
         <a href="https://t.me/OlumPayeQuestion" target="_blank" class="footer-link-floating">
             <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" class="tg-icon" alt="Telegram">
             هر روز کلی سؤال علوم پایه در @OlumPayeQuestion
         </a>
-    </footer>
+    </footer> -->
 
     <script>
     // ── Persian number helper ──────────────────────────────────────────────
@@ -669,7 +671,7 @@
         }
         if (diffs.length === 0) return { short: 0, long: Infinity };
         const sorted = [...diffs].sort((a, b) => a - b);
-        const q = Math.max(1, Math.floor(sorted.length * 0.25));
+        const q = Math.max(1, Math.floor(sorted.length * 0.15));
         return { short: sorted[q - 1], long: sorted[sorted.length - q] };
     }
 
