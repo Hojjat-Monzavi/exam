@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import html
 import json
 import os
 import re
@@ -42,12 +43,17 @@ def to_persian_digits(value):
     return re.sub(r"[0-9]", lambda m: PERSIAN_DIGITS[int(m.group())], str(value))
 
 
-def persianize_html_text(html):
+def persianize_html_text(text):
     # Only replace digits outside of HTML tags
-    parts = re.split(r"(<[^>]+>)", html)
+    parts = re.split(r"(<[^>]+>)", text)
     for i in range(0, len(parts), 2):
         parts[i] = to_persian_digits(parts[i])
     return "".join(parts)
+
+
+def esc(value):
+    """Escape text for safe placement inside rich-message HTML."""
+    return html.escape(str(value), quote=False)
 
 
 # ── Git ────────────────────────────────────────────────────────────────────────
@@ -64,6 +70,7 @@ def get_commit_info():
         "committer":         run_git(["log", "-1", "--pretty=format:%an"]),
         "commit_date_iso":   run_git(["log", "-1", "--pretty=format:%ci"]),
         "commit_date_short": run_git(["log", "-1", "--pretty=format:%cs"]),
+        "commit_date_unix":  run_git(["log", "-1", "--pretty=format:%ct"]),
         "commit_message":    run_git(["log", "-1", "--pretty=format:%s"]),
         "commit_sha":        run_git(["log", "-1", "--pretty=format:%h"]),
     }
@@ -209,15 +216,27 @@ def filter_upcoming(rows, now=None):
     return [row for row in rows if days_between(row["date"], now) >= 0]
 
 
-# ── Message builder ────────────────────────────────────────────────────────────
+# ── Rich message builders ───────────────────────────────────────────────────────
 
-def build_exam_list(rows, now=None):
+def build_exam_table(rows, now=None):
+    """Build an HTML <table> (Telegram rich-message format) of upcoming exams."""
     if not rows:
         return ""
 
     now = now or datetime.now()
-    out_lines = []
 
+    header = (
+        "<tr>"
+        "<th>آزمون</th>"
+        "<th>روز</th>"
+        "<th>تاریخ</th>"
+        "<th>ساعت</th>"
+        "<th>وضعیت</th>"
+        "<th>تگ‌ها</th>"
+        "</tr>"
+    )
+
+    body_rows = []
     for i, row in enumerate(rows):
         # First exam: show absolute days remaining
         # Subsequent exams: show gap from the previous exam
@@ -233,41 +252,68 @@ def build_exam_list(rows, now=None):
             gap = days_between(row["date"], rows[i - 1]["date"])
             remaining = f"{gap} روز بعد" if gap > 0 else "همان روز"
 
-        # Build optional tag suffix
-        tags_suffix = ""
-        if row["tags"]:
-            tags_suffix = " | " + "، ".join(row["tags"])
+        tags_text = "، ".join(row["tags"]) if row["tags"] else "—"
 
-        out_lines.append(
-            f"\n• <b>{row['name']}</b>{tags_suffix}\n"
-            f" {row['day']} | {row['persian_date']} | {row['time']} | {remaining}\n"
+        body_rows.append(
+            "<tr>"
+            f"<td align=\"right\">{esc(row['name'])}</td>"
+            f"<td align=\"center\">{esc(row['day'])}</td>"
+            f"<td align=\"center\">{esc(row['persian_date'])}</td>"
+            f"<td align=\"center\">{esc(row['time'])}</td>"
+            f"<td align=\"center\">{esc(remaining)}</td>"
+            f"<td align=\"right\">{esc(tags_text)}</td>"
+            "</tr>"
         )
 
-    return "".join(out_lines)
+    table = (
+        '<table bordered striped>'
+        '<caption>برنامه آزمون‌های پیش رو</caption>'
+        f"{header}{''.join(body_rows)}"
+        "</table>"
+    )
+
+    return f"<details open><summary>📚 جدول آزمون‌های پیش رو</summary>{table}</details>"
+
+
+def build_commit_block(commit):
+    """Render the last-commit info, showing the commit date as a tg-time entity."""
+    unix_ts = commit["commit_date_unix"]
+    fallback = commit["commit_date_short"]
+    # format="R" -> relative time (e.g. "۲ روز پیش"); falls back to `fallback` text
+    # on clients that don't support rich messages.
+    date_html = f'<tg-time unix="{unix_ts}" format="R">{esc(fallback)}</tg-time>'
+
+    return (
+        "<b>🔄 آخرین بروزرسانی:</b><br>"
+        f"👤 <b>Committer:</b> {esc(commit['committer'])}<br>"
+        f"📅 <b>Date:</b> {date_html} ({esc(fallback)})<br>"
+        f"📝 <b>Message:</b> {esc(commit['commit_message'])}<br>"
+    )
 
 
 # ── Telegram ───────────────────────────────────────────────────────────────────
 
-def send_telegram_message(bot_token, chat_id, message):
+def send_telegram_rich_message(bot_token, chat_id, html_content):
     payload = {
         "chat_id": chat_id,
-        "text": message,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": True,
+        "rich_message": {
+            "html": html_content,
+            "is_rtl": True,
+        },
         "reply_markup": {
-            "inline_keyboard" : [
+            "inline_keyboard": [
                 [
                     {
-                        "text":"🌐مشاهده صفحه وب",
-                        "url" : "https://hojjat-monzavi.github.io/exam/",
-                        "style" : "primary"
+                        "text": "🌐مشاهده صفحه وب",
+                        "url": "https://hojjat-monzavi.github.io/exam/",
+                        "style": "primary"
                     }
                 ]
             ]
         }
     }
     data = json.dumps(payload).encode("utf-8")
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    url = f"https://api.telegram.org/bot{bot_token}/sendRichMessage"
     req = request.Request(url, data=data, headers={"Content-Type": "application/json"})
 
     try:
@@ -297,27 +343,23 @@ def main():
 
     exams      = parse_exam_rows("data.csv")
     upcoming   = filter_upcoming(exams)
-    exam_list  = build_exam_list(upcoming)
-    pages_url  = f"https://{repo_owner}.github.io/{repo_name}"
+    table_html = build_exam_table(upcoming)
 
-    if exam_list:
-        schedule_block = f"<blockquote expandable>{exam_list}</blockquote>\n\n"
+    if table_html:
+        schedule_block = table_html + "<br><br>"
     else:
-        schedule_block = "✅ همه آزمون‌ها پشت سر گذاشته شده‌اند یا تاریخ آن‌ها به اتمام رسیده است.\n\n"
+        schedule_block = "✅ همه آزمون‌ها پشت سر گذاشته شده‌اند یا تاریخ آن‌ها به اتمام رسیده است.<br><br>"
 
     if event_type == "commit":
         commit  = get_commit_info()
         message = (
-            "<b>📚 آپدیت آزمون‌های پیش رو</b>\n\n"
+            "<b>📚 آپدیت آزمون‌های پیش رو</b><br><br>"
             f"{schedule_block}"
-            "<b>🔄 آخرین بروزرسانی:</b>\n"
-            f"👤 <b>Committer:</b> {commit['committer']}\n"
-            f"📅 <b>Date:</b> {commit['commit_date_short']}\n"
-            f"📝 <b>Message:</b> {commit['commit_message']}\n\n"
+            f"{build_commit_block(commit)}"
         )
     elif event_type == "daily_update":
         message = (
-            "<b>📅 زمان‌بندی روزانه آزمون‌های باقیمانده</b>\n\n"
+            "<b>📅 زمان‌بندی روزانه آزمون‌های باقیمانده</b><br><br>"
             f"{schedule_block}"
         )
     else:
@@ -331,7 +373,7 @@ def main():
         print(message)
         return
 
-    send_telegram_message(bot_token, chat_id, message)
+    send_telegram_rich_message(bot_token, chat_id, message)
     print("Notification sent.")
 
 
