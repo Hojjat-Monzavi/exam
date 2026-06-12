@@ -227,12 +227,12 @@ def build_exam_table(rows, now=None):
 
     header = (
         "<tr>"
-        "<th>آزمون</th>"
-        "<th>روز</th>"
-        "<th>تاریخ</th>"
-        "<th>ساعت</th>"
-        "<th>وضعیت</th>"
-        "<th>تگ‌ها</th>"
+        "<th align=\"right\">آزمون</th>"
+        "<th align=\"right\">روز</th>"
+        "<th align=\"right\">تاریخ</th>"
+        "<th align=\"right\">ساعت</th>"
+        "<th align=\"right\">وضعیت</th>"
+        "<th algin=\"right\">تگ‌ها</th>"
         "</tr>"
     )
 
@@ -257,10 +257,10 @@ def build_exam_table(rows, now=None):
         body_rows.append(
             "<tr>"
             f"<td align=\"right\">{esc(row['name'])}</td>"
-            f"<td align=\"center\">{esc(row['day'])}</td>"
-            f"<td align=\"center\">{esc(row['persian_date'])}</td>"
-            f"<td align=\"center\">{esc(row['time'])}</td>"
-            f"<td align=\"center\">{esc(remaining)}</td>"
+            f"<td align=\"right\">{esc(row['day'])}</td>"
+            f"<td align=\"right\">{esc(row['persian_date'])}</td>"
+            f"<td align=\"right\">{esc(row['time'])}</td>"
+            f"<td align=\"right\">{esc(remaining)}</td>"
             f"<td align=\"right\">{esc(tags_text)}</td>"
             "</tr>"
         )
