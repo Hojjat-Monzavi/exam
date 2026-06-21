@@ -646,6 +646,12 @@
             if (parts.length === 3 && parts.every(n => !isNaN(n))) {
                 const [jy, jm, jd] = parts;
                 gregorianDate = jalaliToGregorian(jy, jm, jd);
+                // Combine with time to get absolute datetime
+                if (row.time) {
+                    const [h, m] = row.time.split(':').map(n => parseInt(n, 10));
+                    gregorianDate.setUTCHours(h, m);
+                }
+                
                 // getUTCDay: 0=Sun … 6=Sat  → our WEEKDAYS array: 0=Sun
                 dayName    = WEEKDAYS[gregorianDate.getUTCDay()];
                 persianDate = `${toPersian(jd)} ${MONTHS[jm - 1]}`;
@@ -659,7 +665,8 @@
                 dayName,
                 persianDate,
             };
-        }).filter(e => e.gregorianDate !== null);
+        }).filter(e => e.gregorianDate !== null)
+          .sort((a, b) => a.gregorianDate - b.gregorianDate);
     }
 
     // ── Gap classification ────────────────────────────────────────────────

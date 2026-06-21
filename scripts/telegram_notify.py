@@ -195,6 +195,10 @@ def parse_exam_rows(path):
 
             try:
                 exam_dt = parse_jalali_date(date_str)
+                # Apply time if provided
+                if exam_time:
+                    h, m = map(int, exam_time.split(':'))
+                    exam_dt = exam_dt.replace(hour=h, minute=m)
             except (ValueError, TypeError) as exc:
                 eprint(f"Skipping row {name!r}: {exc}")
                 continue
@@ -208,6 +212,8 @@ def parse_exam_rows(path):
                 "tags":         tags,
             })
 
+    # Sort by datetime
+    rows.sort(key=lambda x: x["date"])
     return rows
 
 
