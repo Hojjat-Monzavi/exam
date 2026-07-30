@@ -292,7 +292,7 @@ def build_commit_block(commit):
     return (
         "<b>🔄 آخرین بروزرسانی:</b><br>"
         f"👤 <b>Committer:</b> {esc(commit['committer'])}<br>"
-        f"📅 <b>Date:</b> {date_html} ({esc(fallback)})<br>"
+        f"📅 <b>Date:</b> {date_html}<br>"
         f"📝 <b>Message:</b> {esc(commit['commit_message'])}<br>"
     )
 
