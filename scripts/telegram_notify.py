@@ -156,7 +156,7 @@ def format_persian_date(dt):
 
 def days_between(a, b):
     """Ceiling of (a - b) in days. Positive means a is in the future relative to b."""
-    return math.ceil((a - b).total_seconds() / SECONDS_IN_DAY)
+    return math.round((a - b).total_seconds() / SECONDS_IN_DAY)
 
 
 # ── Tags ───────────────────────────────────────────────────────────────────────
@@ -291,7 +291,7 @@ def build_commit_block(commit):
 
     return (
         "<b>🔄 آخرین بروزرسانی:</b><br>"
-        f"👤 <b>Committer:</b> {esc(commit['committer'])}<br>"
+        f"👤 <b>Contibuter:</b> {esc(commit['committer'])}<br>"
         f"📅 <b>Date:</b> {date_html}<br>"
         f"📝 <b>Message:</b> {esc(commit['commit_message'])}<br>"
     )
