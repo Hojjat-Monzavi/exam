@@ -156,7 +156,7 @@ def format_persian_date(dt):
 
 def days_between(a, b):
     """Ceiling of (a - b) in days. Positive means a is in the future relative to b."""
-    return math.round((a - b).total_seconds() / SECONDS_IN_DAY)
+    return round((a - b).total_seconds() / SECONDS_IN_DAY)
 
 
 # ── Tags ───────────────────────────────────────────────────────────────────────
